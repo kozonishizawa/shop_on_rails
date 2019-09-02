@@ -1,0 +1,119 @@
+// ==============================================
+// CART (PC)
+// ==============================================
+
+.p-cart
+  min-height: 100vh
+
+  &__inner
+    width: 79%
+    margin: 0 auto
+  &__body
+    display:flex
+    flex-direction: column
+  &__heading
+    font-weight: bold
+    font-size: 2.5em
+  &__notice
+    text-align: center
+    font-size: 1.3em
+    font-weight: bold
+  &__cart
+    background-color: #fff
+    margin: 0 0 20px 0
+  &__table
+    border-bottom: solid 1px #f4f4f4
+  &__image
+    width: 15%
+    padding: 28px
+  &__name
+    font-size: 1.2em
+    width: 45%
+    padding: 35px
+  &__delete_btn
+  &__btn
+    font-size: 0.8em
+    color: #9e73f7
+    border-color: #fff
+    text-align: left
+    transition: color 0.1s ease-in,background-color 0.1s ease-in
+    &:hover
+      color: #FF4F50
+      text-decoration: none
+  &__price
+    font-size: 1em
+    width: 15%
+    padding: 15px
+  &__form
+    padding: 20px
+    width: 15%
+    &_item
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      padding: 2px 5px
+      font-size: 1.2em
+  &__quantity
+    width: 50%
+    margin-bottom: 0
+    border-color: #f4f4f4
+    background-color: #f4f4f4
+    text-align: center
+    &:hover
+      color: #FF4F50
+  &__update
+    padding: 10px 0
+    &_button
+      padding: 12px 5px
+      letter-spacing: 2px
+      margin: 0 auto
+      background-color: #ECEFF1
+      border-color: #ECEFF1
+      border-style: solid
+      border-radius: 4px
+      &:hover
+        background-color: darken(#ECEFF1, 10%)
+        color: #FF4F50
+  &__price
+    font-size: 1.1em
+    text-align: center
+  &__subtotal
+    font-size: 1.3em
+    font-weight: bold
+    text-align: right
+    margin: 20px 0
+  &__menu
+    padding: 2em 0
+    height: 10%
+    text-align: center
+    display: flex
+    margin: 0 auto
+    justify-content: space-around
+  &__previous
+    padding: 15px
+    display: inline-block
+    color: #fff
+    background-color: #7986CB
+    border-color: #5C6BC0
+    border-style: solid
+    border-width: 0 0 1px
+    border-radius: 4px
+    &:hover
+      color: #fff
+      text-decoration: none
+      background-color: darken(#7986CB, 10%)
+  &__next
+    padding: 15px
+    display: inline-block
+    color: #fff
+    background-color: #E91E63
+    border-color: #D81B60
+    border-style: solid
+    border-width: 0 0 1px
+    border-radius: 4px
+    &:hover
+      color: #fff
+      text-decoration: none
+      background-color: darken(#E91E63, 10%)
+
+  

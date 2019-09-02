@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: ordered_items
+#
+#  id           :bigint           not null, primary key
+#  product_id   :bigint
+#  purchaser_id :bigint
+#  quantity     :integer          default(0)
+#  method       :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  purchaser_id: 1
+  quantity_XS: 1
+  quantity_S: 1
+  quantity_M: 1
+  quantity_L: 1
+  quantity_XL: 1
+  quantity: 1
+
+two:
+  product_id: 1
+  purchaser_id: 1
+  quantity_XS: 1
+  quantity_S: 1
+  quantity_M: 1
+  quantity_L: 1
+  quantity_XL: 1
+  quantity: 1

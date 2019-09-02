@@ -1,0 +1,11 @@
+- provide(:title, "ログイン")
+- provide(:link, procedures_new_path)
+- provide(:value, '1')
+- provide(:button, 'ログインして購入手続きへ進む>>')
+.p-procedure
+  .p-procedure__inner
+    h1.p-procedure__heading
+      | ログインして購入
+    = render 'sessions/login_form'
+    .p-procedure__next
+      = link_to("ログインせずに購入手続きへ進む>>","/procedures/nonmember_form", class: 'p-procedure__nextButton')

@@ -1,0 +1,37 @@
+.main.products-new
+  .container
+    h1.form-heading
+      | 出品する
+    p
+      | 商品情報を入力してください。
+    = form_with model: @product, url: products_path, local: true do |f|
+    
+      .form
+        .form-body
+          - @product.errors.full_messages.each do |message|
+            .form-error
+              = message
+          
+          .c-form-label = f.label :name, '品名'
+          = f.text_field :name, placeholder: '品名', required: :true
+
+          .c-form-label = f.label :category, 'カテゴリー'
+          = f.text_field :category, placeholder: 'カテゴリー', required: :true
+
+          .c-form-label = f.label :price, '値段'
+          = f.text_field :price, value: @product.price, required: :true
+            |円
+
+          .c-form-label = f.label :size, 'サイズ'
+          = f.select :size, Product.sizes.keys, {}
+
+          .c-form-label = f.label :stock, '在庫数量'
+          = f.number_field :stock, value: 0, min: 0
+
+          .c-form-label = f.label :comment, 'コメント'
+          = f.text_area :comment, placeholder: 'コメント', rows: 5, required: :true
+          
+          .c-form-label = f.label :image, '画像'
+           = f.file_field :image, accept: :image
+          
+          .u-ta-center.u-mt-30 = f.submit "出品"

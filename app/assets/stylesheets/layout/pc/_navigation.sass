@@ -1,0 +1,29 @@
+// ==============================================
+// NAVIGATION MENU (PC)
+// ==============================================
+
+@import "mixin"
+
+.l-navigation 
+  position: sticky
+  top: 0
+  background-color: #fff
+  z-index: 5000
+  box-shadow: rgba(51,51,51,0.28) 2px 4px 3px -2px
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  &__inner
+    width: 82%
+    margin: 0 auto
+  &__menu
+    margin: 0
+    display: flex
+    align-items: center
+    justify-content: flex-end
+  &__item
+    list-style: none
+  &__link
+    flex-direction: row
+    @include link_style
+    padding: 20px

@@ -1,0 +1,48 @@
+.p-product__section_half
+  .p-product__information
+    h1.p-product__name
+      = @product.name
+    p.p-product__price
+      = @product.price
+      |  円
+    p.p-product__comment
+      = @product.comment
+  hr
+  - if @current_user == nil || @current_user.admin == false
+    .p-product__menu
+      .p-product__notice
+        - if total_stock <= 0
+          p.p-product__soldout
+            | 売り切れ
+        - else
+          p
+            | ご希望のサイズを選択して下さい。
+          span
+            | ※在庫があるサイズのみ表示しています。
+      - Product.where(name: @product.name).each do |product|
+        - if product.stock > 0
+          dl.p-product__clearfix
+            dt.p-product__clearfix_term
+              div.p-product__clearfix_img
+                - if product.image.attached?
+                  = image_tag product.thumbnail, alt: 'no_image', width: '75%'
+              span.p-product__clearfix_txt
+            dd.p-product__clearfix_discription
+              ul.p-product__clearfix_list
+                li.p-product__clearfix_part
+                  .p-product__clearfix_stock
+                    p
+                      = product.size
+                      br
+                        |/残り
+                        = product.stock
+                        |点
+                  .p-product__input
+                    = form_with model: @cart_item, url: @cart_item.new_record? ? cart_items_path : cart_item_path(@cart_item.id), local: true do |f|
+                      = f.hidden_field :quantity, value: 1
+                      = f.hidden_field :product_id, value: product.id
+                      .p-product__submit
+                        = f.submit "カートに入れる", class: "p-product__button"
+  - if @current_user && @current_user.admin == true
+    = link_to "編集", edit_product_path(@product.id)
+    = link_to "削除", product_path,{method:"delete", data: { confirm: '削除する前に、この商品が誰かのカートに入っていないか確認して下さい。本当に削除しますか？' }}

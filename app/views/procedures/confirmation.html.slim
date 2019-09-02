@@ -1,0 +1,78 @@
+- provide(:title, "ご注文確認")
+.p-procedure
+  .p-procedure__inner
+    h1.p-procedure__heading
+        | ご注文内容の確認
+    .p-procedure__notice
+      p
+        | 下記ご注文内容をご確認下さい。
+      - if current_cart.method == "credit"
+        p
+          | よろしければ「注文を確定し、カード情報を入力」ボタンを押して下さい。
+      - elsif current_cart.method == "COD"
+        span
+          | よろしければ「注文を確定する」ボタンを押して下さい。
+    .p-procedure__body
+      .p-procedure__purchaser
+        h3
+          | お名前
+        p
+          | フリガナ:
+          = @purchaser.kana
+        p
+          | 氏名:
+          = @purchaser.last_name
+          = @purchaser.first_name
+        h3
+          | ご住所(お届け先)
+        p
+          | 〒
+          = @purchaser.postal_code
+        p
+          = @purchaser.prefecture
+          = @purchaser.city
+          = @purchaser.address
+        h3
+          | ご連絡先
+        p
+          | 電話番号:
+          = @purchaser.phone_number
+        p
+          | メールアドレス:
+          = @purchaser.email
+      table.p-procedure__cart
+        - @cart_items.each do |cart_item|
+          tr.p-procedure__table
+            td.p-procedure__image
+              - if cart_item.product.image.attached?
+              = image_tag cart_item.product.thumbnail, alt: 'no_image', width: '100%'
+            td.p-procedure__name
+              p
+                = cart_item.product.name
+            td.p-procedure__form
+              .p-procedure__form_inner
+                - if cart_item.quantity >= 1
+                  .p-procedure__form_item
+                    p
+                      |  × 
+                      = cart_item.quantity
+            td.p-procedure__subtotal
+              p
+                |
+                = cart_item.product.price * cart_item.quantity
+                | 円
+    .p-procedure__total
+      p.p-procedure__totalprice
+          | 合計金額:
+          = total_price
+          | 円
+    .p-procedure__menu
+      .p-procedure__submit_button 
+      - if current_cart.method == "credit"
+        = form_tag(action: :purchase, method: :post) do
+          form[action="/pay" method="post"]
+            |  <script src="https://checkout.pay.jp/" class="payjp-button" data-key="
+            = ENV['PAYJP_PUBLIC_KEY']
+            | " data-text="注文を確定し、カード情報を入力" data-submit-text="確定"> 
+      - elsif current_cart.method == "COD"
+        =  link_to "注文を確定する","/procedures/purchase", method: :post, class: 'p-procedure__COD', data: { confirm: "注文を確定します。"}

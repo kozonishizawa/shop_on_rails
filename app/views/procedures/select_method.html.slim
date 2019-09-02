@@ -1,0 +1,14 @@
+- provide(:title, "支払方法選択")
+.p-procedure
+  .p-procedure__inner
+    h1.p-procedure__heading
+      | お支払い方法の選択
+    .p-procedure__form
+      = form_with model: current_cart, url: procedures_decide_method_path, local: true do |f|
+        .p-procedure__form_item
+          = f.radio_button :method, 'COD',  checked: true
+          = f.label :method, "代金引換", class: 'p-procedure__radio'
+        .p-procedure__form_item
+          = f.radio_button :method, 'credit'
+          = f.label :method, "クレジットカード決済", class: 'p-procedure__radio'
+        = f.submit "確認画面へ>>", class: "btn btn-primary"

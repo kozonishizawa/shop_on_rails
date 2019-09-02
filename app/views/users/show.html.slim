@@ -1,0 +1,10 @@
+.main.user-show
+  .container
+    .user
+      h2
+        = @user.name
+      p
+        = @user.email
+    - if @user.id == @current_user.id
+      .user-menus
+        = link_to "編集", edit_user_path(current_user)

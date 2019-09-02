@@ -1,0 +1,4 @@
+| こんにちは 
+= @user.name
+|  さん。 ようこそ Mild Surf Clubへ! アカウントを有効にするには、下のリンクをクリックして下さい。 
+= edit_account_activation_url(@user.activation_token, email: @user.email)

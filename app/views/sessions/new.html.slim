@@ -1,0 +1,9 @@
+- provide(:title, "ログイン")
+- provide(:link, signup_path)
+- provide(:value, '0')
+- provide(:button, 'ログイン')
+.p-session
+  .p-session__inner
+    h1.p-session__heading
+      | ログイン
+    = render 'login_form'

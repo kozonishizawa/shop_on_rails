@@ -1,0 +1,189 @@
+// ==============================================
+// PRODUCT (PC)
+// ==============================================
+
+/* mixin */
+
+@mixin card 
+  border-color: #f4f4f4
+  border-style: solid
+  border-width: 0 0 1px
+  border-radius: 4px
+  box-shadow: 0 18px 36px -4px rgba(199,199,199,0.44)
+
+@mixin horizontal_division 
+  width: 48%
+  background-color: #fff
+  display: flex
+  flex-direction: column
+  align-items: center
+
+@mixin division_line 
+  margin: 20px 0
+  border-color: #f4f4f4
+  border-style: solid
+  border-width: 1px 0 0
+  width: 100%
+
+
+
+.p-product
+  display: flex
+  justify-content: center
+  &__inner
+    width: 88%
+    display: inline-flex
+    align-items: flex-end
+    justify-content: space-between
+    flex-direction: row
+    flex-wrap: wrap
+
+  &__grid
+    align-items: flex-start
+    padding-left: 24px
+    margin-bottom: 60px
+    display: inline-block
+    width: 25%
+    
+  &__card
+    position: relative
+    display: block
+    background-color: #fff
+    text-align: center
+    padding: 0
+    color: #44413f
+    z-index: 1
+    margin-bottom: 20px
+    overflow: hidden
+    display: inline-block
+    text-decoration: none
+    font-size: 14px
+    transition: all 0.3s ease 0s
+    @include card
+    &:hover
+      text-decoration: none
+      transform: scale(1.05, 1.05)
+      background-color: darken(#fff, 3%)
+    img 
+      top: 0
+      left: 0
+      height: 100%
+      width: 100%
+      border-style: none
+      line-height: 300px
+
+  &__info-card
+    text-align: center
+    padding-bottom: 5px
+
+  &__name-card
+
+  &--price-card
+
+  .product 
+    width: 90%
+    margin: 0 auto
+    display: flex
+    justify-content: space-between
+    padding: 5em 0
+
+  &__section_half
+    @include horizontal_division
+    @include card
+    margin: 5em 0
+    justify-content: center
+    align-self: stretch
+
+  &__photo 
+    max-width: 90%
+    margin: 0 auto
+    padding: 2em
+
+  &__information
+    max-width: 90%
+    padding: 2em
+    display: flex
+    flex-direction: column
+ 
+  &__name
+    font-weight: bold
+    text-transform: uppercase
+    display: block
+    font-size: 2.5em
+  
+  &__price
+    font-size: 1.5em
+    padding-bottom: 1em
+    display: block
+
+  &__comment
+    background-color: #fff
+    display: block
+  
+  hr 
+    @include division_line
+  
+  &__menu 
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    padding: 2em
+    max-width: 90%
+    margin: 0 auto
+  &__notice
+    width: 100%
+    p
+      font-size: 1em
+      margin: 0
+    span
+      font-size: 0.8em
+      color: #FF4F50
+  &__soldout
+    fontsize: 2em
+    color: #FF4F50
+
+  &__clearfix
+    width: 100%
+    display: flex
+    flex-direction: row
+    &_term
+      width: 20%
+    &_img
+    &_txt
+      width: 50%
+    &_list
+
+    &_part
+      display: flex
+      flex-direction: row
+      border-bottom: 1px solid #f4f4f4
+    &_stock
+      width: 25%
+      text-align: center
+      font-size: 0.8em
+  &__input
+    font-size: 1em
+  &__quantity
+    width: 60%
+    background-color: #f4f4f4
+    border: 1px solid #f4f4f4
+    border-radius: 4px
+    
+
+  &__submit
+    width: 100%
+    text-align: center
+    padding: 0.75em 0
+  &__button 
+    width: 250px
+    margin: 0 10px
+    letter-spacing: 2px
+    color: #fff
+    background-color: #428bca
+    border-color: #357ebd
+    border-style: solid
+    border-width: 0 0 1px
+    border-radius: 4px
+    &:hover
+      background-color: darken(#428bca, 10%)
+

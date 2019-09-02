@@ -1,0 +1,9 @@
+- provide(:title, @product.name)
+.p-product
+  .p-product__inner
+    - if @product
+      = render 'products/photo'
+      = render 'products/information'
+    - else
+      p
+        | 商品はありません
