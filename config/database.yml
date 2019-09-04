@@ -29,4 +29,7 @@ test:
 
 production:
   <<: *default
-  database: db/production
+  adapter: postgresql
+  database: production.postgresql
+  username:
+  password:
