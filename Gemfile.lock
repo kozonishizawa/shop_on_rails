@@ -202,6 +202,9 @@ GEM
       shellany (~> 0.0)
     payjp (0.0.7)
       rest-client (~> 2.0)
+    pg (1.1.4)
+    postgresql (1.0.0)
+      pg
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -359,6 +362,7 @@ DEPENDENCIES
   minitest-reporters (= 1.0.5)
   mysql2
   payjp
+  postgresql
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.3)
