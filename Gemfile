@@ -82,11 +82,11 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'jquery-rails'
 
-  # Use Capistrano for deployment
-  gem 'capistrano', '~> 3.11',    require: false
-  gem 'capistrano-rbenv',         require: false
-  gem 'capistrano-rails',         require: false
-  gem 'capistrano-bundler',       require: false
-  gem 'capistrano3-unicorn',      require: false
-  gem 'capistrano-sidekiq',       require: false
-  gem 'capistrano-faster-assets', require: false
+# Use Capistrano for deployment
+gem 'capistrano', '~> 3.11',    require: false
+gem 'capistrano-rbenv',         require: false
+gem 'capistrano-rails',         require: false
+gem 'capistrano-bundler',       require: false
+gem 'capistrano3-unicorn',      require: false
+gem 'capistrano-sidekiq',       require: false
+gem 'capistrano-faster-assets', require: false

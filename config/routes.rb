@@ -25,13 +25,8 @@ Rails.application.routes.draw do
   resources :products
   resources :cart_items
   patch  'cart_items/add_one'        => 'cart_items#add_one'
-  resources :carts
-
-
-  
 
   get    'procedures/login_form'      => 'procedures#login_form'
-  post   'procedures/login'           => 'procedures#login'
   get    'procedures/new'             => 'procedures#new'
   get    'procedures/entry_form'      => 'procedures#entry_form'
   get    'procedures/nonmember_form'  => 'procedures#nonmember_form'

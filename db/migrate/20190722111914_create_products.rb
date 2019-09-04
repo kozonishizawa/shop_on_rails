@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :price
       t.string :comment
-      t.integer :category
+      t.integer :category_id
       t.string :color
       t.integer :size, default: 0
       t.integer :stock, default: 0

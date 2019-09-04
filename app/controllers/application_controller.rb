@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def forbid_login_user
   	if @current_user
   		flash[:danger] = "すでにログインしています"
-  		redirect_to("/products/index")
+  		redirect_back_or(products_path)
   	end
   end
 
@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
       cart = Cart.create
       session[:cart_id] = cart.id
     end
-    return cart
+    cart
   end
   
   #カート内商品の合計金額

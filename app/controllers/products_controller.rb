@@ -18,8 +18,12 @@ class ProductsController < ApplicationController
 
 
   def create
-    Product.create! product_params
-    redirect_to products_path, flash: {success: '商品を登録しました'}
+    @product = Product.new product_params
+    if @product.save
+      redirect_to products_path, flash: {success: "商品「#{@product.name}」を登録しました"}
+    else
+      render :new
+    end
   end
 
   def edit
@@ -40,7 +44,7 @@ class ProductsController < ApplicationController
 
 private
     def product_params
-      params.require(:product).permit :name, :category, :price, :comment, :size, :stock, :image
+      params.require(:product).permit :name, :category_id, :price, :comment, :size, :stock, :image
     end
 
 end

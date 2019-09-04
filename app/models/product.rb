@@ -8,7 +8,7 @@
 #  comment    :string(255)
 #  category   :integer
 #  color      :string(255)
-#  size       :integer          default(0)
+#  size       :integer          default("nosize")
 #  stock      :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -18,6 +18,7 @@ class Product < ApplicationRecord
     has_one_attached :image
 	has_many :cart_items, dependent: :destroy
     has_many :ordered_items, dependent: :destroy
+    belongs_to :category,   optional: true
 	validates :name,	 	presence: true, length: {maximum: 30}
 	validates :price, 	 	presence: true
     validates :comment,  	presence: true, length: {maximum: 140}

@@ -6,6 +6,6 @@
 .p-top__topics
   p.p-top__index
     | PRODUCTS
-= render 'products/product'
-.l-pagination
+/= render 'products/product'
+/.l-pagination
   = will_paginate @products
