@@ -9,6 +9,8 @@ gem 'rails', '~> 5.2.3'
 gem 'mysql2'
 #gem 'postgresql'
 
+gem 'unicorn'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
