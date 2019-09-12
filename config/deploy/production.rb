@@ -1,8 +1,5 @@
 lock '3.11.0'
 
-require 'yaml'
-require 'capistrano/sidekiq'
-
 set :application, 'shop_on_rails'
 
 # environment
@@ -21,7 +18,7 @@ set :assets_dependencies, %w(app/assets app/javascript package.json yarn.lock co
 set :rbenv_ruby, '2.6.3'
 set :default_env, { path: '~/.rbenv/shims:~/.rbenv/bin:$PATH' }
 
-set :repo_url, 'git@github.com:kenzooooo/shop_on_rails.git'
+set :repo_url, 'git@github.com:kozonishizawa/shop_on_rails.git'
 set :branch, 'master'
 set :deploy_to, '/home/media'
 set :log_level, :debug
@@ -30,10 +27,6 @@ set :default_shell, '/bin/bash -l'
 server 'aws', user: 'media', roles: %w{app assets batch db}
 
 set :assets_roles, [:assets]
-
-
-# sidekiq
-set :sidekiq_role, :batch
 
 after 'deploy:publishing', 'deploy:restart'
 

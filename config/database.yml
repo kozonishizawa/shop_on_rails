@@ -29,7 +29,7 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  database: production.postgresql
-  username:
+  adapter: mysql2
+  database: shop
+  username: root
   password:
