@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  before_action:set_current_user
+  before_action :set_current_user
+  before_action :setup_cart_item
   protect_from_forgery with: :exception
   helper_method :current_cart, :total_price, :total_quantity
   include SessionsHelper
@@ -83,7 +84,8 @@ class ApplicationController < ActionController::Base
     end
     total_quantity
   end
-private
+  
+  private
 
     def setup_cart_item
       @cart_item = current_cart.cart_items.find_or_initialize_by(product_id: params[:id])

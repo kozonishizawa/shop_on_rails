@@ -1,0 +1,40 @@
+user media;
+worker_processes 2;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+
+  include       mime.types;
+  default_type  application/octet-stream;
+
+  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                    '$status $body_bytes_sent "$http_referer" '
+                    '"$http_user_agent" "$http_x_forwarded_for"';
+
+  access_log  /var/log/nginx/access.log  main;
+
+  server_names_hash_bucket_size 64;
+
+  sendfile        on;
+  #tcp_nopush     on;
+
+  keepalive_timeout  65;
+
+  gzip  on;
+  gzip_min_length         1024;
+  gzip_http_version       1.0;
+  gzip_comp_level         2;
+  gzip_proxied            any;
+  gzip_types              text/plain text/css application/javascript text/xml application/atom+xml application/xml+rss application/json text/json text/javascript+json;
+
+  gzip_disable            "MSIE [1-6].";
+  gzip_disable            "Mozilla/4";
+
+  proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=zone1:1000m max_size=10g inactive=4h;
+  proxy_temp_path  /var/cache/nginx_tmp;
+
+  include /home/media/current/nginx.production.conf;
+}

@@ -22,9 +22,9 @@ class CartItemsController < ApplicationController
     redirect_to cart_items_path, flash: {success: 'カートから商品を取り出しました'}
   end
 
-private
+  private
 
     def cart_item_params
-      params.require(:cart_item).permit :quantity
+      params.require(:cart_item).permit(:quantity, :product_id)
     end
 end

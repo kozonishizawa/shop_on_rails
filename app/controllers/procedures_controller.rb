@@ -1,9 +1,9 @@
 class ProceduresController < ApplicationController
 
-	before_action:authenticate_cart
-  before_action:authenticate_method, only: [:confirmation, :purchase]
+	before_action :authenticate_cart
+  before_action :authenticate_method, only: [:confirmation, :purchase]
   before_action :logged_in_user, only: [:entry_form]
-  before_action:forbid_login_user, only: [:new, :create, :login_form, :nonmember_form]
+  before_action :forbid_login_user, only: [:new, :create, :login_form, :nonmember_form]
   
   #購入者専用のログイン画面
   def login_form

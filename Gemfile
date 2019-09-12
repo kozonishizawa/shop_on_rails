@@ -83,6 +83,7 @@ gem 'dotenv-rails'
 gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'jquery-rails'
+gem 'ransack'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.11',    require: false

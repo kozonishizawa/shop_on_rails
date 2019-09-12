@@ -4,7 +4,7 @@
       | 出品する
     p
       | 商品情報を入力してください。
-    = form_with model: @product, url: products_path, local: true do |f|
+    = form_with model: @product, url: admin_products_path, local: true do |f|
     
       .form
         .form-body

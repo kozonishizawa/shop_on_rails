@@ -12,13 +12,14 @@
         - @cart_items.each do |cart_item|
           tr.p-cart__table
             td.p-cart__image
-              - if cart_item.product.image.attached?
-              = image_tag cart_item.product.thumbnail, alt: 'no_image', width: '100%'
+              = link_to product_path(cart_item.product_id) do
+                - if cart_item.product.image.attached?
+                = image_tag cart_item.product.thumbnail, alt: 'no_image', width: '100%'
             td.p-cart__name
-              p
-                = cart_item.product.name
+              = link_to product_path(cart_item.product_id) do
+                p = cart_item.product.name
               .p-cart__delete_btn
-                = link_to "削除", cart_item_path(cart_item.product.id), method: :delete, class: "p-cart__btn" ,data: { confirm: 'カートから取り出しますか？' }
+                = link_to "削除", cart_item_path(cart_item.product.id), method: :delete, class: "p-cart__btn" , data: { confirm: 'カートから取り出しますか？' }
             td.p-cart__size
               p
                 = cart_item.product.size

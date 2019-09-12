@@ -1,42 +1,40 @@
 Rails.application.routes.draw do
-  
+
   # TOP
   root                              'home#top'
 
   # 管理者
   namespace :admin do
-  
     root 'home#index'
-    
+    resources :users
+    resources :products
   end
 
-
-  get 	 'about'          	     => 'home#about'
-  get    'contact'               => 'home#contact'
-  get    '/signup'               => 'users#new'
-  post   '/signup'               => 'users#create'
-  get    '/login'                => 'sessions#new'
-  post   '/login'                => 'sessions#create'
-  delete '/logout'               => 'sessions#destroy'
+  get    'about',                 to: 'home#about'
+  get    'contact',               to: 'home#contact'
+  get    '/signup',               to: 'users#new'
+  post   '/signup',               to: 'users#create'
+  get    '/login',                to: 'sessions#new'
+  post   '/login',                to: 'sessions#create'
+  delete '/logout',               to: 'sessions#destroy'
   
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :products
+  resources :products, only: [:index, :show]
   resources :cart_items
-  patch  'cart_items/add_one'        => 'cart_items#add_one'
 
-  get    'procedures/login_form'      => 'procedures#login_form'
-  get    'procedures/new'             => 'procedures#new'
-  get    'procedures/entry_form'      => 'procedures#entry_form'
-  get    'procedures/nonmember_form'  => 'procedures#nonmember_form'
-  post   'procedures/entry'           => 'procedures#entry'
-  patch  'procedures/entry'           => 'procedures#entry'
-  post   'procedures/create'          => 'procedures#create'
-  post   'procedures/purchase'        => 'procedures#purchase'
-  get    'procedures/confirmation'    => 'procedures#confirmation'
-  get    'procedures/select_method'   => 'procedures#select_method'
-  patch   'procedures/decide_method'   => 'procedures#decide_method'
-  post   'procedures/payment'         => 'procedures#payment'
+  get    'procedures/login_form',      to: 'procedures#login_form'
+  get    'procedures/new',             to: 'procedures#new'
+  get    'procedures/entry_form',      to: 'procedures#entry_form'
+  get    'procedures/nonmember_form',  to: 'procedures#nonmember_form'
+  post   'procedures/entry',           to: 'procedures#entry'
+  patch  'procedures/entry',           to: 'procedures#entry'
+  post   'procedures/create',          to: 'procedures#create'
+  post   'procedures/purchase',        to: 'procedures#purchase'
+  get    'procedures/confirmation',    to: 'procedures#confirmation'
+  get    'procedures/select_method',   to: 'procedures#select_method'
+  patch  'procedures/decide_method',   to: 'procedures#decide_method'
+  post   'procedures/payment',         to: 'procedures#payment'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

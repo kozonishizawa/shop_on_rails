@@ -2,7 +2,7 @@
   .container
     h1.form-heading
       | 編集する
-    = form_with model: @product, url: product_path(@product.id), local: true do |f|
+    = form_with model: @product, url: admin_product_path(@product.id), local: true do |f|
       .form
         .form-body
           - @product.errors.full_messages.each do |message|

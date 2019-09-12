@@ -1,20 +1,21 @@
 header.l-header
   .l-header__inner
     .l-header__logo
-      - if @current_user && @current_user.admin?
-        = link_to admin_root_url, id:"logo" do
-          = image_tag("/msc_images/logo_title.png", :alt=>"MSC")
-      - elsif @current_user
-        = link_to products_path, id:"logo" do
+      - if logged_in?
+        = link_to current_user.admin? ? admin_root_path : products_path, id:"logo" do
           = image_tag("/msc_images/logo_title.png", :alt=>"MSC")
       - else
         = link_to root_path, id:"logo" do
           = image_tag("/msc_images/logo_title.png", :alt=>"MSC")
-    - unless logged_in?
-      ul.l-header__menu
+    .l-header__menu
+      - if logged_in?
+        li.l-header__item
+          = link_to "ログアウト", logout_path, method: :delete
+      - else
         li.l-header__item
           = link_to "about", about_path, class: "l-header__link"
         li.l-header__item
-          = link_to "新規登録", "/signup", class: "l-header__link"
+          = link_to "新規登録", signup_path, class: "l-header__link"
         li.l-header__item
           = link_to "ログイン", login_path, class: "l-header__link"
+    

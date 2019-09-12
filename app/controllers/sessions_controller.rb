@@ -10,8 +10,12 @@ class SessionsController < ApplicationController
   	if user && user.authenticate(params[:password])
 			if user.activated?
 				log_in user
-	  	  params[:remember_me] == '1' ? remember(user) : forget(user)
-				params[:page] == '0' ? redirect_back_or(user) : redirect_back_or(procedures_entry_form_path)
+				params[:remember_me] == '1' ? remember(user) : forget(user)
+				if user.admin?
+					redirect_to admin_root_path
+				else
+					params[:page] == '0' ? redirect_back_or(user) : redirect_back_or(procedures_entry_form_path)
+				end
 			else
 				message = "アカウントが有効ではありません"
 				message += "メールを確認して下さい"
