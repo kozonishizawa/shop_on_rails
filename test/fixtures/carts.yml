@@ -3,7 +3,7 @@
 # Table name: carts
 #
 #  id         :bigint           not null, primary key
-#  method     :string(255)
+#  method     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

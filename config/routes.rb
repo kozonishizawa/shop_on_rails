@@ -1,13 +1,29 @@
 Rails.application.routes.draw do
 
   # TOP
-  root                              'home#top'
+  root 'home#top'
 
   # 管理者
   namespace :admin do
+
     root 'home#index'
+    get 'search', to: 'products#search'
+    
+    #ユーザー管理
     resources :users
+
+    #商品管理
     resources :products
+
+    #カテゴリ管理
+    resources :categories, except: [:show]
+
+    #購入者情報
+    resources :purchasers, except: [:new, :create]
+
+    #注文商品
+    resources :ordered_items, except: [:new, :create]
+    
   end
 
   get    'about',                 to: 'home#about'

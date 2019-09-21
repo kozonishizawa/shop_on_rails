@@ -1,0 +1,39 @@
+.p-orderedItem
+  .p-orderedItem__inner
+    h1.p-orderedItem__heading　注文履歴
+    .p-orderedItem__listWrapper
+      p.p-orderedItem__purchaser 
+        | 購入者:
+        = @purchaser.last_name + ' ' + @purchaser.first_name
+      table.p-orderedItem__table
+          thread.p-orderedItem__thread
+            tr.p-orderedItem__item
+              th.p-orderedItem__header 購入日
+              th.p-orderedItem__image イメージ
+              th.p-orderedItem__header 商品名
+              th.p-orderedItem__header サイズ
+              th.p-orderedItem__header 金額
+              th.p-orderedItem__header 数量
+              th.p-orderedItem__header 小計
+              th.p-orderedItem__header 支払方法
+              th.p-orderedItem__header 入金状況
+              th.p-orderedItem__header 発送状況
+              th.p-orderedItem__header 取引状況
+          tbody.p-orderedItem__body
+            - @ordered_items.each do |ordered_item|
+              tr.p-orderedItem__item
+                td.p-orderedItem__data = ordered_item.created_at.strftime('%Y/%m/%d')
+                td.p-orderedItem__image = image_tag ordered_item.product.thumbnail, width: '100%'
+                td.p-orderedItem__data = ordered_item.product.name
+                td.p-orderedItem__data = ordered_item.product.size
+                td.p-orderedItem__data
+                  = ordered_item.product.price
+                  | 円
+                td.p-orderedItem__data = ordered_item.quantity
+                td.p-orderedItem__data
+                  = ordered_item.product.price * ordered_item.quantity
+                  | 円
+                td.p-orderedItem__data = ordered_item.method_i18n
+                td.p-orderedItem__data = ordered_item.paid? ? '完了' : '未了'
+                td.p-orderedItem__data = ordered_item.shipped? ? '完了' : '未了'
+                td.p-orderedItem__data = ordered_item.completed? ? '完了' : '未了'

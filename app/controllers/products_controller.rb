@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   
   def index
     @q = Product.ransack(params[:q])
+    @categories = Category.all
     @products = @q.result(distinct: true).order('created_at DESC').paginate(page: params[:page]).per_page(20)
   end
 

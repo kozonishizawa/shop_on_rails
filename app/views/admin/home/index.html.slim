@@ -1,8 +1,7 @@
 .l-dashboard
-  h1.l-dashboard__heading 管理メニュー
-
-  - admin_menu.each do |menu|
-
-    .l-dashboard__panel
-      = link_to menu[:url] do
-        h2 = menu[:name]
+  .l-dashboard__inner
+    h1.l-dashboard__heading 管理メニュー
+    .l-dashboard__menu
+      - admin_menu.each do |menu|
+        = link_to menu[:url], class: 'l-dashboard__card' do
+          p = menu[:name]

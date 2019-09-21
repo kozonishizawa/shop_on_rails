@@ -1,42 +1,39 @@
-.l-dashboard
-  .l-dashboard__inner
-    h1.l-dashboard__heading 商品管理メニュー
-    = search_form_for @q, url: admin_products_path, class: 'l-dashboard__searchForm' do |f|
-      = f.label :name_cont, '商品名', class: 'l-dashboard__searchLabel'
-      = f.search_field :name_cont, class: 'l-dashboard__searchField'
-      = f.submit '検索', class: 'l-dashboard__searchButton'
-
-    .l-dashboard__panel
-      table.l-dashboard__product
-        thead
-          tr
-            th
-            th 商品名
-            th カテゴリー
-            th サイズ
-            th 在庫数量
-            th
-            th
-        tbody
+.p-stocks
+  .p-stocks__inner
+    h1.p-stocks__heading 在庫一覧
+    = render 'products/search_form'
+    .p-stocks__listWrapper
+      table.p-stocks__list
+        thead.p-stocks__thread
+          tr.p-stocks__item
+            th.p-stocks__header ID
+            th.p-stocks__header イメージ
+            th.p-stocks__header 商品名
+            th.p-stocks__header カテゴリー
+            th.p-stocks__header サイズ
+            th.p-stocks__header 在庫数量
+            th.p-stocks__header
+        tbody.p-stocks__body
           - @products.each do |product|
-            tr.l-dashboard__table
-              td.l-dashboard__image
+            tr.p-stocks__item
+              td.p-stocks__data = product.id
+              td.p-stocks__image
                 = link_to edit_admin_product_path(product.id) do
                   -if product.image.attached?
-                  = image_tag product.thumbnail, width: '300px' if product.image.attached?
-              td.l-dashboard__name
+                  = image_tag product.thumbnail, width: '100%' if product.image.attached?
+              td.p-stocks__data
                 = link_to edit_admin_product_path(product.id) do
                   p = product.name
-              td.l-dashboard__category
-                p = product.category
-              td.l-dashboard__size
+              td.p-stocks__data
+                p = product.category&.name
+              td.p-stocks__data
                 p = product.size
-              td.l-dashboard__form
+              td.p-stocks__update
                 = form_with model: product, url: admin_product_path(product.id), local: true do |f|
-                  .l-dashboard__formItem
-                    = f.number_field :stock, class: 'l-dashboard__stock', min: 0
-                    = f.submit '更新', class: 'l-dashboard__updateButton'
-              td.l-dashboard__destroy
-                = link_to '削除', admin_product_path(product.id), method: :delete, data: { confirm: "#{product.name}の出品を取りやめますか？" }
+                  .p-stocks__formItem
+                    = f.number_field :stock, class: 'p-stocks__stock', min: 0
+                    = f.submit '更新', class: 'p-stocks__updateButton'
+              td.p-stocks__destroy
+                = link_to '削除', admin_product_path(product.id), method: :delete, data: { confirm: "#{product.name}の出品を取りやめますか？" }, class: 'btn btn-danger'
     .pagination
       = will_paginate @products

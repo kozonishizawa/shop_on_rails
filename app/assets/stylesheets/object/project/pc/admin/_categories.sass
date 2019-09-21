@@ -1,0 +1,52 @@
+// ==============================================
+// CATEGORIES (PC)
+// ==============================================
+
+.p-categories
+  &__inner
+    text-align: center
+  &__heading
+    font-weight: bold
+    font-size: 2.5em
+  &__new
+    padding: 10px 30px
+    width: 250px
+    font-size: 25px
+    display: inline-block
+    color: #fff
+    background-color: #E91E63
+    border-color: #D81B60
+    border-style: solid
+    border-width: 0 0 1px
+    border-radius: 4px
+    transition: all 0.3s ease 0s
+    box-shadow: 0 18px 36px -4px rgba(199,199,199,0.44)
+    &:hover
+      transform: scale(1.03, 1.03)
+      color: #fff
+      text-decoration: none
+      background-color: darken(#E91E63, 10%)
+  &__list
+    margin: 0 auto
+    padding: 30px
+    display: flexbox
+    flex-direction: row
+  &__item
+    font-size: 30px
+    margin: 15px
+    padding: 5px 15px
+    background-color: #fff
+    transition: all 0.3s ease 0s
+    box-shadow: 0 18px 36px -4px rgba(199,199,199,0.44)
+    &:hover
+      transform: scale(1.03, 1.03)
+      background-color: darken(#fff, 2%)
+  &__link
+    &:hover
+      text-decoration: none
+  &__delete
+    font-size: 20px
+    color: rgba(1,1,1,0.3 )
+    margin-left: 20px
+    &:hover
+      text-decoration: none

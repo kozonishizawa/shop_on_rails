@@ -6,7 +6,10 @@
 #  product_id   :bigint
 #  purchaser_id :bigint
 #  quantity     :integer          default(0)
-#  method       :string(255)
+#  method       :integer
+#  paid         :boolean          default(FALSE)
+#  shipped      :boolean          default(FALSE)
+#  completed    :boolean          default(FALSE)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

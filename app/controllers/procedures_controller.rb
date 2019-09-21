@@ -1,5 +1,5 @@
 class ProceduresController < ApplicationController
-
+  require 'payjp'
 	before_action :authenticate_cart
   before_action :authenticate_method, only: [:confirmation, :purchase]
   before_action :logged_in_user, only: [:entry_form]
@@ -30,23 +30,6 @@ class ProceduresController < ApplicationController
     @purchaser = Purchaser.find_or_initialize_by(id: session[:guest_id])
   end
 
-  #ボツ
-  def entry1
-    if current_user&.id || session[:guest_id]
-      @purchaser = Purchaser.find_or_initialize_by(user_id: @current_user&.id || session[:guest_id])
-      @purchaser.attributes = purchaser_params
-    else
-      @purchaser = Purchaser.new purchaser_params
-    end
-
-    if @purchaser.save
-      session[:guest_id] = @purchaser.id
-      redirect_to procedures_select_method_path
-    else
-      render 'entry_form'
-    end
-  end
-
   #購入者情報の確定
   def entry
     if logged_in? && @purchaser = Purchaser.find_or_create_by(user_id: @current_user&.id)
@@ -57,8 +40,7 @@ class ProceduresController < ApplicationController
       @purchaser = Purchaser.create! purchaser_params
       session[:guest_id] = @purchaser.id
     end
-
-      redirect_to procedures_select_method_path
+    redirect_to procedures_select_method_path
   rescue
     render 'entry_form'
   end
@@ -115,8 +97,7 @@ class ProceduresController < ApplicationController
       OrderedItem.import! ordered_items
       Product.import! stocks, on_duplicate_key_update: [:stock]
 
-      if current_cart.method == "credit"
-         require 'payjp'
+      if current_cart.method == 1
          Payjp.api_key = ENV['PAYJP_SECRET_KEY']
          Payjp::Charge.create(currency: 'jpy', amount: total_price, card: params['payjp-token'])
       end
@@ -130,7 +111,7 @@ class ProceduresController < ApplicationController
     render plain: e.message
   end
 
-private
+  private
 
     def purchaser_params
       params.require(:purchaser).permit(:kana, :last_name, :first_name, :postal_code, :prefecture, :city, :address, :phone_number, :email, :email_confirmation, :user_id)
@@ -138,10 +119,6 @@ private
     
     def cart_params
       params.require(:cart).permit(:method)
-    end
-
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
 end

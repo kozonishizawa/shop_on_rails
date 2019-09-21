@@ -6,10 +6,10 @@
     .p-procedure__notice
       p
         | 下記ご注文内容をご確認下さい。
-      - if current_cart.method == "credit"
+      - if current_cart.method == 'credit'
         p
           | よろしければ「注文を確定し、カード情報を入力」ボタンを押して下さい。
-      - elsif current_cart.method == "COD"
+      - else
         span
           | よろしければ「注文を確定する」ボタンを押して下さい。
     .p-procedure__body
@@ -68,11 +68,11 @@
           | 円
     .p-procedure__menu
       .p-procedure__submit_button 
-      - if current_cart.method == "credit"
+      - if current_cart.method == 'credit'
         = form_tag(action: :purchase, method: :post) do
           form[action="/pay" method="post"]
             |  <script src="https://checkout.pay.jp/" class="payjp-button" data-key="
             = ENV['PAYJP_PUBLIC_KEY']
             | " data-text="注文を確定し、カード情報を入力" data-submit-text="確定"> 
-      - elsif current_cart.method == "COD"
+      - else
         =  link_to "注文を確定する","/procedures/purchase", method: :post, class: 'p-procedure__COD', data: { confirm: "注文を確定します。"}

@@ -49,6 +49,7 @@ group :development, :test do
   #gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'byebug',  '9.0.6', platform: :mri
   gem 'annotate'
+  gem 'bullet'
 end
 
 group :development do
@@ -86,6 +87,7 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'jquery-rails'
 gem 'ransack'
+gem 'enum_help'
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 3.11',    require: false

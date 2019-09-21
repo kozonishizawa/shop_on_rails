@@ -1,0 +1,6 @@
+.p-orderedItem
+  .p-orderedItem__inner
+    h1.p-orderedItem__heading　オーダー情報
+    .p-orderedItem__list
+      - @ordered_items.each do |ordered_item|
+        = ordered_item.purchaser.kana

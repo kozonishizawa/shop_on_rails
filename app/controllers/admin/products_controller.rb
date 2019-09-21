@@ -1,8 +1,9 @@
 class Admin::ProductsController < ApplicationController
-  before_action :authenticate_admin, {only: [:new, :create, :edit, :update, :destroy]}
+  before_action :authenticate_admin
 
   def index
     @q = Product.ransack(params[:q])
+    @categories = Category.all
     @products = @q.result(distinct: true).order('created_at DESC').paginate(page: params[:page]).per_page(20)
   end
 
@@ -44,4 +45,7 @@ class Admin::ProductsController < ApplicationController
       params.require(:product).permit :name, :category_id, :price, :comment, :size, :stock, :image
     end
 
+    def search_params
+      params.require(:q).permit(:name_cont)
+    end
 end

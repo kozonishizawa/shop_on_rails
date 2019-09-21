@@ -5,10 +5,8 @@
       | お支払い方法の選択
     .p-procedure__form
       = form_with model: current_cart, url: procedures_decide_method_path, local: true do |f|
-        .p-procedure__form_item
-          = f.radio_button :method, 'COD',  checked: true
-          = f.label :method, "代金引換", class: 'p-procedure__radio'
-        .p-procedure__form_item
-          = f.radio_button :method, 'credit'
-          = f.label :method, "クレジットカード決済", class: 'p-procedure__radio'
+        = f.collection_radio_buttons :method, Cart.methods_i18n, :first, :last, include_hidden: false do |i|
+          - content_tag(:div, class: 'p-procedures__form_item') do
+            - i.radio_button(class: 'p-procedures__radio') + i.label(class: 'p-procedures__label')
+
         = f.submit "確認画面へ>>", class: "btn btn-primary"

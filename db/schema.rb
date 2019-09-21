@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_09_02_223831) do
   end
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "method"
+    t.integer "method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 2019_09_02_223831) do
     t.bigint "product_id"
     t.bigint "purchaser_id"
     t.integer "quantity", default: 0
-    t.string "method"
+    t.integer "method"
+    t.boolean "paid", default: false
+    t.boolean "shipped", default: false
+    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_ordered_items_on_product_id"

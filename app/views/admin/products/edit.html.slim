@@ -1,33 +1,4 @@
 .main.products-new
   .container
-    h1.form-heading
-      | 編集する
-    = form_with model: @product, url: admin_product_path(@product.id), local: true do |f|
-      .form
-        .form-body
-          - @product.errors.full_messages.each do |message|
-            .form-error
-              = message
-          
-          .c-form-label = f.label :name, '品名'
-          = f.text_field :name, placeholder: '品名', value: @product.name, required: :true
-
-          .c-form-label = f.label :category, 'カテゴリー'
-          = f.text_field :category, placeholder: 'カテゴリー'
-
-          .c-form-label = f.label :price, '値段'
-          = f.text_field :price, value: @product.price, required: :true
-            |円
-
-          p
-            | 在庫
-          .c-form-label = f.label :stock, '在庫数量'
-          = f.number_field :stock, value: @product.stock, min: 0
-
-          .c-form-label = f.label :comment, 'コメント'
-          = f.text_area :comment, placeholder: 'コメント', value: @product.comment, rows: 5, required: :true
-
-          .c-form-label = f.label :image, '画像'
-          = f.file_field :image, accept: :image
-
-          .u-ta-center.u-mt-30 = f.submit "更新"
+    h1.form-heading 編集する
+    = render 'form'

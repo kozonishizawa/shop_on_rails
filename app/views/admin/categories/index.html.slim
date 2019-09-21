@@ -1,0 +1,9 @@
+.p-categories
+  .p-categories__inner
+    h1.p-categories__heading カテゴリ管理
+    = link_to '新規作成', new_admin_category_path, class: 'p-categories__new'
+    ul.p-categories__list
+      - @categories.each do |category|
+        li.p-categories__item
+          = link_to "#{category.name}", edit_admin_category_path(category.id), class: 'p-categories__link'
+          = link_to '[削除]', admin_category_path(category.id), method: :delete, class: 'p-categories__delete'

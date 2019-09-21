@@ -1,0 +1,6 @@
+  = link_to '戻る', admin_categories_path, class: 'p-categories__link'
+  .p-categories__form
+    = form_with model: [:admin, @category], local: true, class: 'p-categories__form' do |f|
+      = f.text_field :name, placeholder: 'カテゴリ名を入力してください', class: 'p-categories__textField'
+      = f.submit '登録', class: 'p-categories__button'
+  

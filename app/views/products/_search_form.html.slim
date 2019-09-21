@@ -1,0 +1,10 @@
+.p-search
+  .p-search__inner
+    = search_form_for @q, url: admin_products_path, class: 'p-search__form' do |f|
+      .p-search__item
+        = f.label :name_cont, '商品名で検索', class: 'p-search__label'
+        = f.search_field :name_cont, placeholder: 'お探しの商品名', class: 'p-search__field'
+      .p-search__item
+        = f.label :category_id_eq, 'カテゴリで検索', class: 'p-search__label'
+        = f.collection_select :category_id_eq, @categories, :id, :name, :include_blank => '指定なし', class: 'p-search__field'
+      = f.submit '検索', class: 'p-search__button'

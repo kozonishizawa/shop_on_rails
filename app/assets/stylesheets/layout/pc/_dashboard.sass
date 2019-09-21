@@ -5,7 +5,7 @@
 .l-dashboard
   min-height: 100vh
   &__inner
-    width: 79%
+    padding: 0 5%
     margin: 0 auto
   &__heading
     font-weight: bold
@@ -108,5 +108,26 @@
       color: #fff
       text-decoration: none
       background-color: darken(#E91E63, 10%)
+  &__menu
+    padding: 50px
+    display: inline-flex
+    flex-direction: row
+    justify-content: between-space
+    width: 100%
+  &__card
+    width: 200px
+    height: 200px
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    font-weight: bold
+    background-color: #fff
+    box-shadow: 0 18px 36px -4px rgba(199,199,199,0.44)
+    border-radius: 4px
+    transition: all 0.3s ease 0s
+    &:hover
+      transform: scale(1.03, 1.03)
+      background-color: darken(#fff, 2%)
+      text-decoration: none
 
   
