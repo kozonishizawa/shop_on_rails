@@ -1,0 +1,14 @@
+.p-search
+  .p-search__inner
+    = search_form_for @q, url: admin_purchasers_path, class: 'p-search__form' do |f|
+      .p-search__item
+        = f.label :kana_cont, 'フリガナで検索', class: 'p-search__label'
+        = f.search_field :kana_cont, placeholder: '', class: 'p-search__field'
+      .p-search__item
+        = f.label :email_cont, 'メールアドレスで検索', class: 'p-search__label'
+        = f.search_field :email_cont, placeholder: '', class: 'p-search__field'
+      .p-search__item
+        = f.label :phone_number_cont, '電話番号で検索', class: 'p-search__label'
+        = f.search_field :phone_number_cont, placeholder: '', class: 'p-search__field'
+
+      = f.submit '検索', class: 'p-search__button'

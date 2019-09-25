@@ -1,23 +1,21 @@
 .p-purchasers
   .p-purchasers__inner
     h1.p-purchasers__heading　オーダー一覧
+    = render 'search_form'
     .p-purchasers__listWrapper
       table.p-purchasers__list
         thread.p-purchasers__thread
           tr.p-purchasers__item
-            th.p-purchasers__header ID
+            th.p-purchasers__header = sort_link(@q, :updated_at)
+              | 更新日時
             th.p-purchasers__header 購入者
             th.p-purchasers__header 注文内容
-            th.p-purchasers__header 登録日時
-            th.p-purchasers__header 更新日時
             th
         tbody.p-purchasers__body
           - @purchasers.each do |purchaser|
             tr.p-purchasers__item
-              td.p-purchasers__data = purchaser.id
+              td.p-purchasers__data = purchaser.updated_at.strftime('%Y/%m/%d')
               td.p-purchasers__data = link_to purchaser.last_name + ' ' + purchaser.first_name, admin_purchaser_path(purchaser.id), class: 'p-purchasers__link'
               td.p-purchasers__data = link_to '詳細', admin_ordered_item_path(purchaser.id), class: 'p-purchasers__link'
-              td.p-purchasers__data = purchaser.created_at
-              td.p-purchasers__data = purchaser.updated_at
               td = link_to '削除', admin_purchaser_path(purchaser.id), method: :delete, data: {confirm: "#{purchaser.kana}の購入者情報を削除します。よろしいですか?"}, class: 'btn btn-danger'
 

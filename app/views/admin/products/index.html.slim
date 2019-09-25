@@ -11,6 +11,7 @@
             th.p-stocks__header 商品名
             th.p-stocks__header カテゴリー
             th.p-stocks__header サイズ
+            th.p-stocks__header 金額
             th.p-stocks__header 在庫数量
             th.p-stocks__header
         tbody.p-stocks__body
@@ -28,6 +29,8 @@
                 p = product.category&.name
               td.p-stocks__data
                 p = product.size
+              td.p-stocks__data
+                p = product.price
               td.p-stocks__update
                 = form_with model: product, url: admin_product_path(product.id), local: true do |f|
                   .p-stocks__formItem

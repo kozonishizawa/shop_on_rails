@@ -106,7 +106,9 @@ class ProceduresController < ApplicationController
       current_cart.update(method: nil)
       
     end
-     redirect_to products_path, flash: {success: 'お買い上げありがとうございます!'}
+    PurchaserMailer.purchaser_email(@purchaser).deliver_now
+    PurchaserMailer.order_notification.deliver_now
+    redirect_to products_path, flash: {success: 'お買い上げありがとうございます!'}
   rescue => e
     render plain: e.message
   end

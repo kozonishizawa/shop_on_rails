@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :purchasers, except: [:new, :create]
 
     #注文商品
-    resources :ordered_items, except: [:new, :create]
+    resources :ordered_items, only: [:show, :update, :destroy]
     
   end
 

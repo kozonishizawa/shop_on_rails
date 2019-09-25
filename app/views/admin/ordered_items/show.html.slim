@@ -8,7 +8,8 @@
       table.p-orderedItem__table
           thread.p-orderedItem__thread
             tr.p-orderedItem__item
-              th.p-orderedItem__header 購入日
+              th.p-orderedItem__header = sort_link(@q, :created_at)
+                | 購入日
               th.p-orderedItem__image イメージ
               th.p-orderedItem__header 商品名
               th.p-orderedItem__header サイズ
@@ -34,6 +35,15 @@
                   = ordered_item.product.price * ordered_item.quantity
                   | 円
                 td.p-orderedItem__data = ordered_item.method_i18n
-                td.p-orderedItem__data = ordered_item.paid? ? '完了' : '未了'
-                td.p-orderedItem__data = ordered_item.shipped? ? '完了' : '未了'
-                td.p-orderedItem__data = ordered_item.completed? ? '完了' : '未了'
+                td.p-orderedItem__data
+                  = form_with model: ordered_item, url: admin_ordered_item_path(ordered_item.id), method: :patch, local: true, class: 'p-orderedItem__form' do |f|
+                    = f.hidden_field :paid, value: ordered_item.paid? ? false : true
+                    = f.submit ordered_item.paid? ? '入金済' : '未確認', class: ordered_item.paid? ? 'p-orderedItem__true' : 'p-orderedItem__false'
+                td.p-orderedItem__data
+                  = form_with model: ordered_item, url: admin_ordered_item_path(ordered_item.id), method: :patch, local: true, class: 'p-orderedItem__form' do |f|
+                    = f.hidden_field :shipped, value: ordered_item.shipped? ? false : true
+                    = f.submit ordered_item.shipped? ? '発送済' : '未発送', class: ordered_item.shipped? ? 'p-orderedItem__true' : 'p-orderedItem__false'
+                td.p-orderedItem__data
+                  = form_with model: ordered_item, url: admin_ordered_item_path(ordered_item.id), method: :patch, local: true, class: 'p-orderedItem__form' do |f|
+                    = f.hidden_field :completed, value: ordered_item.completed? ? false : true
+                    = f.submit ordered_item.completed? ? '完了' : '未完', class: ordered_item.completed? ? 'p-orderedItem__true' : 'p-orderedItem__false'
