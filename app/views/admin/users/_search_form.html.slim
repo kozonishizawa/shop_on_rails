@@ -1,0 +1,17 @@
+.p-search
+  .p-search__inner
+    = search_form_for @q, url: admin_users_path, class: 'p-search__form' do |f|
+      .p-search__item
+        = f.label :name_cont, '名前で検索', class: 'p-search__label'
+        = f.search_field :name_cont, placeholder: '', class: 'p-search__field'
+      .p-search__item
+        = f.label :email_cont, 'メールアドレスで検索', class: 'p-search__label'
+        = f.search_field :email_cont, placeholder: '', class: 'p-search__field'
+      .p-search__item
+        = f.label :admin_cont, '権限で検索', class: 'p-search__label'
+        = f.search_field :admin_cont, placeholder: '', class: 'p-search__field'
+      .p-search__item
+        = f.label :activated_cont, '状態で検索', class: 'p-search__label'
+        = f.search_field :activated_cont, placeholder: '', class: 'p-search__field'
+
+      = f.submit '検索', class: 'p-search__button'

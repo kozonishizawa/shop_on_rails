@@ -20,23 +20,14 @@
               td.p-stocks__data = product.id
               td.p-stocks__image
                 = link_to edit_admin_product_path(product.id) do
-                  -if product.image.attached?
                   = image_tag product.thumbnail, width: '100%' if product.image.attached?
-              td.p-stocks__data
-                = link_to edit_admin_product_path(product.id) do
-                  p = product.name
-              td.p-stocks__data
-                p = product.category&.name
-              td.p-stocks__data
-                p = product.size
-              td.p-stocks__data
-                p = product.price
-              td.p-stocks__update
-                = form_with model: product, url: admin_product_path(product.id), local: true do |f|
-                  .p-stocks__formItem
-                    = f.number_field :stock, class: 'p-stocks__stock', min: 0
-                    = f.submit '更新', class: 'p-stocks__updateButton'
-              td.p-stocks__destroy
-                = link_to '削除', admin_product_path(product.id), method: :delete, data: { confirm: "#{product.name}の出品を取りやめますか？" }, class: 'btn btn-danger'
-    .pagination
-      = will_paginate @products
+              td.p-stocks__data = link_to product.name, edit_admin_product_path(product.id)
+              td.p-stocks__data = product.category&.name
+              td.p-stocks__data = product.size
+              td.p-stocks__data = product.price
+              td.p-stocks__update = form_with model: product, url: admin_product_path(product.id), local: true do |f|
+                .p-stocks__formItem
+                  = f.number_field :stock, class: 'p-stocks__stock', min: 0
+                  = f.submit '更新', class: 'p-stocks__updateButton'
+              td.p-stocks__destroy = link_to '削除', admin_product_path(product.id), method: :delete, data: { confirm: "#{product.name}の出品を取りやめますか？" }, class: 'btn btn-danger'
+    .pagination = will_paginate @products

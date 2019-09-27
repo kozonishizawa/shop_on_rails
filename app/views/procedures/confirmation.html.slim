@@ -71,8 +71,8 @@
       - if current_cart.method == 'credit'
         = form_tag(action: :purchase, method: :post) do
           form[action="/pay" method="post"]
-            |  <script src="https://checkout.pay.jp/" class="payjp-button" data-key="
-            = ENV['PAYJP_PUBLIC_KEY']
-            | " data-text="注文を確定し、カード情報を入力" data-submit-text="確定"> 
+
+            = javascript_include_tag 'https://checkout.pay.jp/', class: 'payjp-button', 'data-key': ENV['PAYJP_PUBLIC_KEY'], 'data-text': '注文を確定し、カード情報を入力', 'data-submit-text': '確定'
+
       - else
         =  link_to "注文を確定する","/procedures/purchase", method: :post, class: 'p-procedure__COD', data: { confirm: "注文を確定します。"}

@@ -27,12 +27,10 @@
                 td.p-orderedItem__image = image_tag ordered_item.product.thumbnail, width: '100%'
                 td.p-orderedItem__data = ordered_item.product.name
                 td.p-orderedItem__data = ordered_item.product.size
-                td.p-orderedItem__data
-                  = ordered_item.product.price
+                td.p-orderedItem__data = ordered_item.product.price
                   | 円
                 td.p-orderedItem__data = ordered_item.quantity
-                td.p-orderedItem__data
-                  = ordered_item.product.price * ordered_item.quantity
+                td.p-orderedItem__data = ordered_item.product.price * ordered_item.quantity
                   | 円
                 td.p-orderedItem__data = ordered_item.method_i18n
                 td.p-orderedItem__data

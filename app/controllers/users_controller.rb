@@ -1,13 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action:authenticate_user, {only: [:index, :show, :edit, :update, :destroy]}
+  before_action:authenticate_user, {only: [:show, :edit, :update]}
   before_action:forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action:ensure_correct_user, {only: [:show, :edit, :update]}
-  before_action:admin_user, {only: [:destroy]}
-
-  def index
-  	@users = User.where(activated: true).paginate(page: params[:page])
-  end
 
   def show
     @user = User.find_by(id: params[:id])
@@ -35,9 +30,8 @@ class UsersController < ApplicationController
 
   def update
   	@user = User.find_by(id: params[:id])
-  	if @user.update_attributes(user_params)
-  		flash[:success] = "ユーザー情報を更新しました"
-  		redirect_to @user
+  	if @user.update user_params
+  		redirect_to @user, flash: {success: "ユーザー情報を更新しました"}
   	else
   		render "edit"
     end
@@ -51,16 +45,8 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find_by(id: params[:id])
-    redirect_to(products_index_path) unless current_user?(@user)
+    redirect_to(root_path) unless current_user?(@user)
   end
-
-  def destroy
-    User.find_by(id: params[:id]).destroy
-    flash[:success] = "ユーザーを削除しました"
-    redirect_to users_url
-  end
-
-
 
 private
 

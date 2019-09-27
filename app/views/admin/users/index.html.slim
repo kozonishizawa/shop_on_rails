@@ -1,0 +1,29 @@
+- provide(:title, "ユーザー一覧")
+.p-users
+  .p-users__inner
+    h1.p-users__heading ユーザー管理
+    = render 'search_form'
+    .p-users__listWrapper
+      table.p-users__table
+        thread.p-users__thread
+          tr.p-users__row
+            th.p-users__header ID
+            th.p-users__header 名前
+            th.p-users__header メールアドレス
+            th.p-users__header 最終更新年月日
+            th.p-users__header 権限
+            th.p-users__header 状態
+            th.p-users__header 
+            th.p-users__header
+        tbody.p-users__body
+          - @users.each do |user|
+            tr.p-users__row
+              td.p-users__data = user.id
+              td.p-users__data = link_to user.name, admin_user_path(user.id)
+              td.p-users__data = user.email
+              td.p-users__data = l(user.created_at, format: :long)
+              td.p-users__data = user.admin? ? '管理者' : '一般'
+              td.p-users__data = user.activated? ? '有効' : '無効'
+              td.p-users__data = link_to '編集', edit_admin_user_path(user.id), class: 'btn btn-primary mr-3'
+              td.p-users__data = link_to '削除', admin_user_path(user.id), method: :delete, data: {confirm: "#{user.name}のデータを削除します。よろしいですか?"}, class: 'btn btn-danger'
+      .pagination = will_paginate
