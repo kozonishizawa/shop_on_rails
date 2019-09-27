@@ -4,7 +4,7 @@
       .p-product__grid
         = link_to product_path(product.id), class: "p-product__card" do
           .p-product__image_container
-            - if product.image.attached?
+            /- if product.image.attached?
               = image_tag product.thumbnail, alt: 'product'
           .p-product__info-card
             p.p-product__name-card

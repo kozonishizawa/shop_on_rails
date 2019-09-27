@@ -1,0 +1,15 @@
+.p-usersForm
+  .p-usersForm__inner
+    h1.p-usersForm__heading
+    .p-usersForm__formWrapper
+      = form_with model: @user, url: users_path, local: true do |f|
+        = render 'shared/error_messages', object: f.object
+        = f.label :name, "ニックネーム"
+        = f.text_field :name, class: 'form-control'
+        = f.label :email, "メールアドレス"
+        = f.email_field :email, class: 'form-control'
+        = f.label :password, "パスワード(6字以上10字以内)"
+        = f.password_field :password, class: 'form-control'
+        = f.label :password_confirmation, "パスワード(確認のため再度入力して下さい)"
+        = f.password_field :password_confirmation, class: 'form-control'
+        = f.submit yield(:button_text), class: "p-form__button"
