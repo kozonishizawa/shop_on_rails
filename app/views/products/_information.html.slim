@@ -23,7 +23,7 @@
         dl.p-product__clearfix
           dt.p-product__clearfix_term
             div.p-product__clearfix_img
-              /- if product.image.attached?
+              - if product.image.attached?
                 = image_tag product.thumbnail, alt: 'no_image', width: '75%'
             span.p-product__clearfix_txt
           dd.p-product__clearfix_discription
