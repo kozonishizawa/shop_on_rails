@@ -1,9 +1,23 @@
+- provide(:title, "カテゴリー一覧")
 .p-categories
   .p-categories__inner
     h1.p-categories__heading カテゴリ管理
     = link_to '新規作成', new_admin_category_path, class: 'p-categories__new'
-    ul.p-categories__list
-      - @categories.each do |category|
-        li.p-categories__item
-          = link_to "#{category.name}", edit_admin_category_path(category.id), class: 'p-categories__link'
-          = link_to '[削除]', admin_category_path(category.id), method: :delete, class: 'p-categories__delete'
+    .p-categories__listWrapper
+      table.p-categories__table
+        thread.p-categories__thread
+          tr.p-categories__row
+            th.p-categories__header ID
+            th.p-categories__header カテゴリ名
+            th.p-categories__header 最終更新
+            th
+            th
+        tbody.p-categories__body
+          - @categories.each do |category|
+            tr.p-categories__row
+              td.p-categories__data = category.id
+              td.p-categories__data = category.name
+              td.p-categories__data = l(category.created_at, format: :long)
+              td.p-categories__data = link_to '編集', edit_admin_category_path(category.id), class: 'btn btn-primary mr-3'
+              td.p-categories__data = link_to '削除', admin_category_path(category.id), method: :delete, class: 'btn btn-danger'
+          

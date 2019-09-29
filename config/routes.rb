@@ -1,31 +1,5 @@
 Rails.application.routes.draw do
 
-  # TOP
-  root 'home#top'
-
-  # 管理者
-  namespace :admin do
-
-    root 'home#index'
-    get 'search', to: 'products#search'
-    
-    #ユーザー管理
-    resources :users
-
-    #商品管理
-    resources :products
-
-    #カテゴリ管理
-    resources :categories, except: [:show]
-
-    #購入者情報
-    resources :purchasers, except: [:new, :create]
-
-    #注文商品
-    resources :ordered_items, only: [:show, :update, :destroy]
-    
-  end
-
   get    'about',                 to: 'home#about'
   get    'contact',               to: 'home#contact'
   get    '/signup',               to: 'users#new'
@@ -33,6 +7,43 @@ Rails.application.routes.draw do
   get    '/login',                to: 'sessions#new'
   post   '/login',                to: 'sessions#create'
   delete '/logout',               to: 'sessions#destroy'
+
+  
+  # TOP
+  root 'home#top'
+  
+  # 管理者
+  namespace :admin do
+    
+    root 'home#index'
+    get 'search', to: 'products#search'
+    
+    #ユーザー管理
+    resources :users
+    
+    #商品管理
+    resources :products
+    
+    #カテゴリ管理
+    resources :categories, except: [:show]
+    
+    #購入者情報
+    resources :purchasers, except: [:new, :create]
+    
+    #注文商品
+    resources :ordered_items, only: [:show, :update, :destroy]
+
+    #お問い合わせ
+    resources :contacts, only: [:index, :show]
+    
+  end
+  
+  namespace :front do
+
+    #お問い合わせ
+    resources :contacts, only: [:index, :create]
+    
+  end
   
   resources :users, except: [:index, :destroy]
   resources :account_activations, only: [:edit]
