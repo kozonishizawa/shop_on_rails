@@ -20,7 +20,7 @@
               td.p-stocks__data = product.id
               td.p-stocks__image
                 = link_to edit_admin_product_path(product.id) do
-                  = image_tag product.thumbnail, width: '100%' if product.image.attached?
+                  = image_tag product.image, width: '100%' if product.image.attached?
               td.p-stocks__data = link_to product.name, edit_admin_product_path(product.id)
               td.p-stocks__data = product.category&.name
               td.p-stocks__data = product.size

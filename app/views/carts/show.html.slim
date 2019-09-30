@@ -16,7 +16,7 @@
           tr.p-cart__table
             td.p-cart__image
               - if cart_item.product.image.attached?
-              = image_tag cart_item.product.thumbnail, alt: 'no_image', width: '100%'
+              = image_tag cart_item.product.image, alt: 'no_image', width: '100%'
             td.p-cart__name
               p
                 = cart_item.product.name
