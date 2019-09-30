@@ -19,16 +19,16 @@ name: "admin"
 email: "1@gmail.com"
 password: "111111"
 
-* System dependencies
+* sidekiq
+** 非同期処理 起動
+$ bundle exec sidekiq -C config/sidekiq.yml
+** 非同期処理 デーモン起動:
+$ bundle exec sidekiq -C config/sidekiq.yml -d
+** sidekiq停止
+$ bundle exec sidekiqctl stop ./tmp/pids/sidekiq.pid
 
-* Configuration
+* 秘匿情報の追加/更新
+$ EDITOR=vi rails credentials:edit
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* デプロイ
+$ bundle exec cap production deploy
