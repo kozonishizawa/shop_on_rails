@@ -25,6 +25,8 @@
             div.p-product__clearfix_img
               - if product.image.attached?
                 = image_tag product.thumbnail, alt: 'no_image', width: '75%'
+              - else 
+                = image_tag 'no_image.png', width: '100%'
             span.p-product__clearfix_txt
           dd.p-product__clearfix_discription
             ul.p-product__clearfix_list
