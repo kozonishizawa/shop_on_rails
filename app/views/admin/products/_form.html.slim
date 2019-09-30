@@ -20,7 +20,7 @@
       = f.select :size, Product.sizes.keys, {}
 
       .c-form-label = f.label :stock, '在庫数量'
-      = f.number_field :stock, value: 0, min: 0
+      = f.number_field :stock, value: @product.stock, min: 0
 
       .c-form-label = f.label :comment, 'コメント'
       = f.text_area :comment, placeholder: 'コメント', rows: 5, required: :true
