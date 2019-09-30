@@ -26,6 +26,6 @@
       = f.text_area :comment, placeholder: 'コメント', rows: 5, required: :true
       
       .c-form-label = f.label :image, '画像'
-        = f.file_field :image, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+        = f.file_field :image, accept: :image
       
       .u-ta-center.u-mt-30 = f.submit "出品"
