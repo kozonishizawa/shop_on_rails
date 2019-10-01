@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart, :total_price, :total_quantity
   include SessionsHelper
 
-  #ログイン中のユーザー
+  # ログイン中のユーザー
   def set_current_user
   	@current_user = User.find_by(id: session[:user_id])
   end
 
-  #アクセス制限（ログインしていないユーザー）
+  # アクセス制限（ログインしていないユーザー）
   def authenticate_user
     unless logged_in?
       store_location
@@ -19,14 +19,14 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  #アクセス制限（ログイン中のユーザー）
+  # アクセス制限（ログイン中のユーザー）
   def forbid_login_user
   	if @current_user
   		redirect_back_or root_path, flash: {danger: 'すでにログインしています'}
   	end
   end
 
-  #アクセス制限（カートが空）
+  # アクセス制限（カートが空）
   def authenticate_cart
     cart_items = current_cart.cart_items
     if cart_items.empty?
@@ -34,21 +34,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #アクセス制限（支払い方法が未設定）
+  # アクセス制限（支払い方法が未設定）
   def authenticate_method
     unless current_cart&.method
       redirect_to root_path, flash: {danger: '先にお支払方法を設定してください'}
     end
   end
 
-  #管理者認証
+  # 管理者認証
   def authenticate_admin
     unless @current_user&.admin?
       redirect_to root_path, flash: {danger: 'アクセス権限がありません'}
     end
   end
 
-  #買い物カゴ
+  # 買い物カゴ
   def current_cart
     if session[:cart_id]
       cart = Cart.find_by(id: session[:cart_id])
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
     cart
   end
   
-  #カート内商品の合計金額
+  # カート内商品の合計金額
   def total_price
     cart_items = current_cart.cart_items
     total_price = 0
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     total_price
   end
 
-  #カート内商品の合計数量
+  # カート内商品の合計数量
   def total_quantity
     cart_items = current_cart.cart_items
     total_quantity = 0

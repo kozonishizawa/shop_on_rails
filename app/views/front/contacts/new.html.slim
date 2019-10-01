@@ -1,0 +1,26 @@
+- provide(:title, 'お問い合わせ')
+.p-contacts
+  .p-contacts__inner
+    h1.p-contacts__heading お問い合わせ
+    .p-contacts__form
+      = form_with model: [:front, @contact], url: front_contacts_path, local: true do |f|
+        = f.label :name, class: 'p-caontacts__label'
+        = f.text_field :name, class: 'p-contacts__field'
+
+        = f.label :title, class: 'p-contacts__label'
+        = f.text_field :title, class: 'p-contacts__field'
+
+        = f.label :organization, class: 'p-contacts__label'
+        = f.text_field :organization, class: 'p-contacts__field'
+
+        = f.label :email, class: 'p-contacts__label'
+        = f.text_field :email, class: 'p-contacts__field'
+
+        = f.label :tel, class: 'p-contacts__label'
+        = f.text_field :tel, class: 'p-contacts__field'
+
+        = f.label :body, class: 'p-contacts__label'
+        = f.text_area :body, class: 'p-contacts__area'
+
+        = f.submit '送信', class: 'p-contacts__submit'
+

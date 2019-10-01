@@ -6,7 +6,8 @@ module ApplicationHelper
 			{ name: '在庫管理', url: admin_products_path},
 			{ name: 'カテゴリ管理', url: admin_categories_path},
 			{ name: 'オーダー管理', url: admin_purchasers_path},
-			{ name: 'ユーザー管理', url: admin_users_path}
+			{ name: 'ユーザー管理', url: admin_users_path},
+			{ name: 'お問い合わせ', url: admin_contacts_path}
 		]
 		menu
 	end
