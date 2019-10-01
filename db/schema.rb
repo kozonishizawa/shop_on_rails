@@ -36,12 +36,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "cart_id"
-    t.integer "quantity_XS"
-    t.integer "quantity_S"
-    t.integer "quantity_M"
-    t.integer "quantity_L"
-    t.integer "quantity_XL"
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
@@ -49,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   end
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "method"
+    t.integer "method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,13 +72,11 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   create_table "ordered_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "purchaser_id"
-    t.integer "quantity_XS"
-    t.integer "quantity_S"
-    t.integer "quantity_M"
-    t.integer "quantity_L"
-    t.integer "quantity_XL"
-    t.integer "quantity"
-    t.string "method"
+    t.integer "quantity", default: 0
+    t.integer "method"
+    t.boolean "paid", default: false
+    t.boolean "shipped", default: false
+    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_ordered_items_on_product_id"
@@ -93,16 +86,11 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "price"
-    t.string "image_name"
     t.string "comment"
-    t.string "category"
+    t.integer "category_id"
     t.string "color"
-    t.integer "stock_XS"
-    t.integer "stock_S"
-    t.integer "stock_M"
-    t.integer "stock_L"
-    t.integer "stock_XL"
-    t.integer "stock"
+    t.integer "size", default: 0
+    t.integer "stock", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -130,7 +118,6 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password"
     t.string "remember_digest"
     t.string "activation_digest"
     t.boolean "activated", default: false
