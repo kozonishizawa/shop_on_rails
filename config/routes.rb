@@ -15,33 +15,33 @@ Rails.application.routes.draw do
   # 管理者
   namespace :admin do
     
+    # 管理者TOP
     root 'home#index'
-    get 'search', to: 'products#search'
     
-    #ユーザー管理
+    # ユーザー管理
     resources :users
     
-    #商品管理
+    # 商品管理
     resources :products
     
-    #カテゴリ管理
+    # カテゴリ管理
     resources :categories, except: [:show]
     
-    #購入者情報
+    # 購入者情報
     resources :purchasers, except: [:new, :create]
     
-    #注文商品
+    # 注文商品
     resources :ordered_items, only: [:show, :update, :destroy]
 
-    #お問い合わせ
+    # お問い合わせ
     resources :contacts, only: [:index, :show]
     
   end
   
   namespace :front do
 
-    #お問い合わせ
-    resources :contacts, only: [:index, :create]
+    # お問い合わせ
+    resources :contacts, only: [:new, :create]
     
   end
   

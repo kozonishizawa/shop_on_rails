@@ -3,6 +3,7 @@
   .p-users__inner
     h1.p-users__heading ユーザー管理
     = render 'search_form'
+    = link_to '新規登録', new_admin_user_path, class: 'p-users__new'
     .p-users__listWrapper
       table.p-users__table
         thread.p-users__thread

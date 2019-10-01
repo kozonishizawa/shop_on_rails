@@ -14,11 +14,14 @@ class Admin::OrderedItemsController < ApplicationController
   end
 
   def destroy
+    ordered_item = OrderedItem.find_by(id: params[:id])
+    ordered_item.destroy
+    redirect_back(fallback_location: admin_ordered_item_path)
   end
 
   private
 
-  def ordered_item_params
-    params.require(:ordered_item).permit(:paid, :shipped, :completed)
-  end
+    def ordered_item_params
+      params.require(:ordered_item).permit(:paid, :shipped, :completed)
+    end
 end
