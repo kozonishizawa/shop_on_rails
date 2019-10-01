@@ -1,6 +1,5 @@
 class CartItemsController < ApplicationController
-  before_action :setup_cart_item, only: [:index, :create, :add_item, :destroy]
-  before_action :authenticate_cart, only: [:order]
+  before_action :setup_cart_item, only: [:index, :create, :destroy]
 
   def index
     @cart_items = current_cart.cart_items
