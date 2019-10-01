@@ -12,7 +12,9 @@
             td.p-cart__image
               = link_to product_path(cart_item.stock.product_id) do
                 - if cart_item.stock.product.image.attached?
-                  = image_tag cart_item.stock.product.image, alt: 'no_image', width: '100%'
+                  = image_tag cart_item.stock.product.thumbnail, alt: 'no_image', width: '100%'
+                - else 
+                  = image_tag 'no_image.png', width: '100%'
             td.p-cart__name
               = link_to product_path(cart_item.stock.product_id) do
                 p = cart_item.stock.product.name

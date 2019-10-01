@@ -7,6 +7,7 @@ module ApplicationHelper
 			{ name: 'カテゴリ管理', url: admin_categories_path},
 			{ name: 'オーダー管理', url: admin_purchasers_path},
 			{ name: 'ユーザー管理', url: admin_users_path},
+			{ name: 'お問い合わせ', url: admin_contacts_path}
 		]
 	end
 
@@ -14,4 +15,6 @@ module ApplicationHelper
 
 		"#{page_title.blank?? nil : page_title+' | '}shop_on_rails"
 	end
+
+	
 end

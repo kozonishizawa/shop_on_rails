@@ -17,8 +17,10 @@
         dl.p-product__clearfix
           dt.p-product__clearfix_term
             div.p-product__clearfix_img
-              - if @product.image.attached?
-                = image_tag @product.image, alt: 'no_image', width: '75%'
+              - if stock.product.image.attached?
+                = image_tag stock.product.thumbnail, alt: 'no_image', width: '75%'
+              - else 
+                = image_tag 'no_image.png', width: '100%'
             span.p-product__clearfix_txt
           dd.p-product__clearfix_discription
             .p-product__clearfix_stock

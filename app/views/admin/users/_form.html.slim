@@ -1,15 +1,23 @@
+h1.p-usersForm__heading
+  = yield(:heading)
 .p-usersForm
   .p-usersForm__inner
-    h1.p-usersForm__heading
-    .p-usersForm__formWrapper
-      = form_with model: @user, url: users_path, local: true do |f|
-        = render 'shared/error_messages', object: f.object
+    = form_with model: [:admin, @user], local: true do |f|
+      = render 'shared/error_messages', object: f.object
+      .form-group
         = f.label :name, "ニックネーム"
         = f.text_field :name, class: 'form-control'
+      .form-group
         = f.label :email, "メールアドレス"
         = f.email_field :email, class: 'form-control'
+      .form-group
+        = f.label :admin, class: 'form-check-label' do
+          = f.check_box :admin, class: 'form-check-input'
+          | 管理者権限
+      .form-group
         = f.label :password, "パスワード(6字以上10字以内)"
         = f.password_field :password, class: 'form-control'
+      .form-group
         = f.label :password_confirmation, "パスワード(確認のため再度入力して下さい)"
         = f.password_field :password_confirmation, class: 'form-control'
-        = f.submit yield(:button_text), class: "p-form__button"
+      = f.submit yield(:button_text), class: "btn btn-primary"

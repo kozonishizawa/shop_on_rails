@@ -5,7 +5,9 @@
         = link_to product_path(product.id), class: 'p-product__card' do
           .p-product__image_container
             - if product.image.attached?
-              = image_tag product.image, alt: 'product'
+              = image_tag product.thumbnail, alt: 'product'
+            - else 
+              = image_tag 'no_image.png', width: '100%'
           .p-product__info-card
             p.p-product__name-card = product.name
             p.p-product__price-card = "¥#{product.price}"

@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
 
-  before_action :forbid_login_user, only: [:top]
-
   def top
     @products = Product.all.reverse_order.paginate(page: params[:page]).per_page(8)
   end
