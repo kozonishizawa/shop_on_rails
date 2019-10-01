@@ -42,7 +42,7 @@ class ProceduresController < ApplicationController
     end
     redirect_to procedures_select_method_path
   rescue
-    render 'entry_form'
+    render :entry_form
   end
 
   #支払い方法選択
@@ -55,59 +55,59 @@ class ProceduresController < ApplicationController
       current_cart.update cart_params
       redirect_to procedures_confirmation_path
     else
-      flash[:danger] = "お支払い方法を選択して下さい"
+      flash[:danger] = 'お支払い方法を選択して下さい'
       redirect_to procedures_select_method_path
     end
   end
 
   #注文内容の確認
   def confirmation
+
     if @current_user.present?
-     @purchaser = Purchaser.find_by(user_id: @current_user.id)
+      @purchaser = Purchaser.find_by(user_id: @current_user.id)
     else
-     @purchaser = Purchaser.find_by(id: session[:guest_id])
+      @purchaser = Purchaser.find_by(id: session[:guest_id])
     end
-     @cart_items = current_cart.cart_items
   end
 
   #注文確定
   def purchase
+
     if @current_user.present?
       @purchaser = Purchaser.find_by(user_id: @current_user.id)
     else 
       @purchaser = Purchaser.find_by(id: session[:guest_id])
     end 
-    @cart_items = current_cart.cart_items
-    
+
     OrderedItem.transaction do
       ordered_items = []
-      stocks = []
-      @cart_items.each do |cart_item|
+
+      current_cart.cart_items.each do |cart_item|
         ordered_items << OrderedItem.new(
           quantity: cart_item.quantity,
-          product_id: cart_item.product_id,
+          product_stock_id: cart_item.product_stock_id,
           purchaser_id: @purchaser.id,
           method: current_cart.method
         )
-        @product = Product.find_by(id: cart_item.product_id)
-        @product.stock -= cart_item.quantity
-        stocks << @product
+
+        cart_item.stock.quantity -= cart_item.quantity
+        raise '商品の在庫が不足しています' if cart_item.stock.quantity < 0
+        cart_item.stock.save!
       end
 
       OrderedItem.import! ordered_items
-      Product.import! stocks, on_duplicate_key_update: [:stock]
 
       if current_cart.method == 1
          Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-         Payjp::Charge.create(currency: 'jpy', amount: total_price, card: params['payjp-token'])
+         Payjp::Charge.create(currency: 'jpy', amount: current_cart.total_price, card: params['payjp-token'])
       end
 
-      @cart_items.delete_all
+      current_cart.cart_items.delete_all
       current_cart.update(method: nil)
-      
     end
     PurchaserMailer.purchaser_email(@purchaser).deliver_now
     PurchaserMailer.order_notification.deliver_now
+
     redirect_to products_path, flash: {success: 'お買い上げありがとうございます!'}
   rescue => e
     render plain: e.message

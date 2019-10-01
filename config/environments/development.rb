@@ -37,7 +37,14 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   #mailcatcherの設定
-  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: '587',
+    domain: 'smtp.gmail.com',
+    authentication: 'plain',
+    user_name: 'ec081072@gmail.com',
+    password: 'xjs695zb/'
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

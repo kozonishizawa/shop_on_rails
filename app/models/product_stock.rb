@@ -1,16 +1,17 @@
 # == Schema Information
 #
-# Table name: cart_items
+# Table name: product_stocks
 #
-#  id               :bigint           not null, primary key
-#  product_stock_id :bigint
-#  cart_id          :bigint
-#  quantity         :integer          default(0)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id         :bigint           not null, primary key
+#  product_id :bigint
+#  color      :string(255)
+#  size       :integer          default("free"), not null
+#  quantity   :integer          default(0), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
-class CartItem < ApplicationRecord
+class ProductStock < ApplicationRecord
 
   #----------------------------------------
   #  ** Includes **
@@ -24,18 +25,21 @@ class CartItem < ApplicationRecord
   #  ** Enums **
   #----------------------------------------
 
+  enum size: { free: 0, xs: 1, s: 2, m: 3, l: 4, xl: 5 }
+
   #----------------------------------------
   #  ** Validations **
   #----------------------------------------
 
-  validates :quantity, numericality: {greater_than_or_equal_to: 0}
+  #validates :color,	   presence: true, length: {maximum: 30}
+  validates :size,	   presence: true, inclusion: { in: ProductStock.sizes.keys }
+  validates :quantity, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
   #----------------------------------------
   #  ** Associations **
   #----------------------------------------
 
-  belongs_to :stock, class_name: 'ProductStock', foreign_key: :product_stock_id
-  belongs_to :cart
+  belongs_to :product
 
   #----------------------------------------
   #  ** Delegates **
@@ -48,5 +52,5 @@ class CartItem < ApplicationRecord
   #----------------------------------------
   #  ** Methods **
   #----------------------------------------
-  
+
 end

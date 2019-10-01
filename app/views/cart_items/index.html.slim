@@ -1,47 +1,38 @@
-- provide(:title, "ショッピングカート")
+- provide :title, 'ショッピングカート'
 .p-cart
   .p-cart__inner
     .p-cart__body
-      h1.p-cart__heading
-        | ショッピングカート
+      h1.p-cart__heading ショッピングカート
       .p-cart__notice
-        - if @cart_items.empty?
-          p
-            | カート内に商品はありません
+        - if current_cart.cart_items.empty?
+          p カート内に商品はありません
       table.p-cart__cart
-        - @cart_items.each do |cart_item|
+        - current_cart.cart_items.each do |cart_item|
           tr.p-cart__table
             td.p-cart__image
-              = link_to product_path(cart_item.product_id) do
-                - if cart_item.product.image.attached?
-                = image_tag cart_item.product.image, alt: 'no_image', width: '100%'
+              = link_to product_path(cart_item.stock.product_id) do
+                - if cart_item.stock.product.image.attached?
+                  = image_tag cart_item.stock.product.image, alt: 'no_image', width: '100%'
             td.p-cart__name
-              = link_to product_path(cart_item.product_id) do
-                p = cart_item.product.name
+              = link_to product_path(cart_item.stock.product_id) do
+                p = cart_item.stock.product.name
               .p-cart__delete_btn
-                = link_to "削除", cart_item_path(cart_item.product.id), method: :delete, class: "p-cart__btn" , data: { confirm: 'カートから取り出しますか？' }
+                = link_to '削除', cart_item_path(cart_item.stock.id), method: :delete, class: 'p-cart__btn' , data: { confirm: 'カートから取り出しますか？' }
             td.p-cart__size
-              p
-                = cart_item.product.size
+              p = cart_item.stock.size.upcase
             td.p-cart__form
               .p-cart__form_inner
                 = form_with model: cart_item, url: cart_item_path(cart_item.id), local: true do |f|
                   .p-cart__form_item
                     = f.label :quantity, '数量'
                     = f.number_field :quantity, class: 'p-cart__quantity', min: 0
-                  .p-cart__update
-                    = f.submit "更新", class: "p-cart__update_button"
+                  .p-cart__update = f.submit '更新', class: "p-cart__update_button"
                   td.p-cart__price
-                    p
-                      = cart_item.quantity * cart_item.product.price
-                      | 円
+                    p = "#{(cart_item.quantity * cart_item.stock.product.price).to_s(:delimited)}円"
       .p-cart__subtotal
-        - if @cart_items.present?
-          p
-            | 合計金額:
-            = total_price
-            | 円
+        - if current_cart.cart_items.present?
+          p = "合計金額: #{current_cart.total_price.to_s(:delimited)}円"
     .p-cart__menu
-      = link_to("<<買い物を続ける", products_path, class: "p-cart__previous")
-      - if @cart_items.present?
-        = link_to("購入手続きに進む>>>>", logged_in?? procedures_entry_form_path : procedures_login_form_path, class: "p-cart__next")
+      = link_to "<<買い物を続ける", products_path, class: 'p-cart__previous'
+      - if current_cart.cart_items.present?
+        = link_to '購入手続きに進む>>>>', logged_in?? procedures_entry_form_path : procedures_login_form_path, class: 'p-cart__next'

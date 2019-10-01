@@ -3,7 +3,6 @@ class CartItemsController < ApplicationController
   before_action :authenticate_cart, only: [:order]
 
   def index
-    @cart_items = current_cart.cart_items
   end
 
   def create
@@ -25,6 +24,6 @@ class CartItemsController < ApplicationController
   private
 
     def cart_item_params
-      params.require(:cart_item).permit(:quantity, :product_id)
+      params.require(:cart_item).permit(:quantity, :product_stock_id)
     end
 end

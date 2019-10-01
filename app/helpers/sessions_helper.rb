@@ -19,11 +19,15 @@ module SessionsHelper
 
   # 記憶トークンcookieに対応するユーザーを返す
   def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
+
+    # 既にユーザー情報を取得済みの場合はそのまま返却
+    return @current_user if @current_user.present?
+
+    if session[:user_id]
+      @current_user = User.find session[:user_id]
+    elsif cookies.signed[:user_id]
+      user = User.find cookies.signed[:user_id]
+      if user.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -32,7 +36,7 @@ module SessionsHelper
 
   # ユーザーがログインしていればtrue、その他ならfalseを返す
 	def logged_in?
-		!current_user.nil?
+		current_user.present?
   end
 
   # 永続的セッションを破棄する
@@ -44,7 +48,7 @@ module SessionsHelper
 
  # 現在のユーザーをログアウトする
   def log_out
-    forget(current_user)
+    forget current_user
     session.delete(:user_id)
     @current_user = nil
   end

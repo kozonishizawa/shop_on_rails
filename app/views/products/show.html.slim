@@ -1,9 +1,8 @@
-- provide(:title, '商品詳細')
+- provide :title, '商品詳細'
 .p-product
   .p-product__inner
     - if @product
       = render 'products/photo'
       = render 'products/information'
     - else
-      p
-        | 商品はありません
+      p 商品はありません

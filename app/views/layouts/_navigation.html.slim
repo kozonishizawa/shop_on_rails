@@ -2,9 +2,9 @@ nav.l-navigation
   .l-navigation__inner
     ul.l-navigation__menu
       li.l-navigation__item
-        = link_to "Products", products_path, class: 'l-navigation__link'
+        = link_to 'Products', products_path, class: 'l-navigation__link'
       li.l-navigation__item
-        = link_to(cart_items_path, class: 'l-navigation__link') do
+        = link_to cart_items_path, class: 'l-navigation__link' do
           i.fas.fa-shopping-cart
           | カート 
-          = total_quantity
+          = current_cart.total_quantity

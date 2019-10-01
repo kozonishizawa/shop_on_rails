@@ -1,46 +1,44 @@
-- provide(:title, "お客様情報入力")
+- provide :title, 'お客様情報入力'
 .p-procedure
   .p-procedure__inner
-    .p-procedure__heading
-      | お客様情報の入力
+    .p-procedure__heading お客様情報の入力
     = form_with model: @purchaser, url: procedures_entry_path, local: true do |f|
       = render 'shared/error_messages', object: f.object
-      h3
-        | お名前
 
-      = f.label :kana, "フリガナ"
+      h3 お名前
+
+      = f.label :kana, 'フリガナ'
       = f.text_field :kana, class: 'form-control', value: @purchaser.kana
 
-      = f.label :last_name, "姓"
+      = f.label :last_name, '姓'
       = f.text_field :last_name, class: 'form-control', value: @purchaser.last_name
 
-      = f.label :first_name, "姓"
+      = f.label :first_name, '名'
       = f.text_field :first_name, class: 'form-control', value: @purchaser.first_name
       
-      h3
-        | ご住所(お届け先)
-      = f.label :postal_code, "郵便番号(ハイフン不要)"
+      h3 ご住所(お届け先)
+
+      = f.label :postal_code, '郵便番号(ハイフン不要)'
       = f.text_field :postal_code, class: 'form-control', value: @purchaser.postal_code
 
-      = f.label :prefecture, "都道府県"
+      = f.label :prefecture, '都道府県'
       = f.text_field :prefecture, class: 'form-control', value: @purchaser.prefecture
 
-      = f.label :city, "市区町村"
+      = f.label :city, '市区町村'
       = f.text_field :city, class: 'form-control', value: @purchaser.city
 
-      = f.label :address, "番地以降"
+      = f.label :address, '番地以降'
       = f.text_field :address, class: 'form-control', value: @purchaser.address
 
-      h3
-        | ご連絡先
+      h3 ご連絡先
 
-      = f.label :phone_number, "電話番号"
+      = f.label :phone_number, '電話番号'
       = f.text_field :phone_number, class: 'form-control', value: @purchaser.phone_number
 
-      = f.label :email, "メールアドレス"
+      = f.label :email, 'メールアドレス'
       = f.email_field :email, class: 'form-control', value: @purchaser.email
 
-      = f.label :email_confirmation, "メールアドレス(確認のため再度入力して下さい)"
+      = f.label :email_confirmation, 'メールアドレス(確認のため再度入力して下さい)'
       = f.email_field :email_confirmation, class: 'form-control', value: @purchaser.email
 
-      = f.submit "次に進む>>", class: "btn btn-primary"
+      = f.submit '次に進む>>', class: 'btn btn-primary'

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     
     #商品管理
     resources :products
-    
+
     #カテゴリ管理
     resources :categories, except: [:show]
     

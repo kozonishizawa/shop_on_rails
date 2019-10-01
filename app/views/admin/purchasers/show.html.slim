@@ -5,28 +5,28 @@
       table.p-purchasers__list
         tr.p-purchasers__item
           th.p-purchasers__header ID
-          td.p-purchasers__data  = @purchaser.id
+          td.p-purchasers__data = @purchaser.id
         tr.p-purchasers__item
           th.p-purchasers__header フリガナ
-          td.p-purchasers__data  = @purchaser.kana
+          td.p-purchasers__data = @purchaser.kana
         tr.p-purchasers__item
           th.p-purchasers__header 氏名
-          td.p-purchasers__data  = @purchaser.last_name + " " + @purchaser.first_name
+          td.p-purchasers__data = @purchaser.last_name + " " + @purchaser.first_name
         tr.p-purchasers__item
           th.p-purchasers__header 郵便番号
-          td.p-purchasers__data  = @purchaser.postal_code
+          td.p-purchasers__data = @purchaser.postal_code
         tr.p-purchasers__item
           th.p-purchasers__header 住所
-          td.p-purchasers__data  = @purchaser.prefecture + @purchaser.city + @purchaser.address
+          td.p-purchasers__data = @purchaser.prefecture + @purchaser.city + @purchaser.address
         tr.p-purchasers__item
           th.p-purchasers__header 電話番号
-          td.p-purchasers__data  = @purchaser.phone_number
+          td.p-purchasers__data = @purchaser.phone_number
         tr.p-purchasers__item
           th.p-purchasers__header メールアドレス
-          td.p-purchasers__data  = @purchaser.email
+          td.p-purchasers__data = @purchaser.email
         tr.p-purchasers__item
           th.p-purchasers__header 登録日
-          td.p-purchasers__data  = @purchaser.created_at
+          td.p-purchasers__data = @purchaser.created_at
         tr.p-purchasers__item
           th.p-purchasers__header 更新日
-          td.p-purchasers__data  = @purchaser.updated_at
+          td.p-purchasers__data = @purchaser.updated_at

@@ -87,9 +87,7 @@ Rails.application.configure do
     port: '587',
     domain: 'smtp.gmail.com',
     authentication: 'plain',
-  # user_name: config.x.system['email'],
     user_name: 'ec081072@gmail.com',
-  # password: Rails.application.credentials.smtp_password,
     password: 'xjs695zb/'
   }
 

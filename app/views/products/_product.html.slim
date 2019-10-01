@@ -2,13 +2,10 @@
   .p-product__inner
     - @products.each do |product|
       .p-product__grid
-        = link_to product_path(product.id), class: "p-product__card" do
+        = link_to product_path(product.id), class: 'p-product__card' do
           .p-product__image_container
             - if product.image.attached?
               = image_tag product.image, alt: 'product'
           .p-product__info-card
-            p.p-product__name-card
-              = product.name
-            p.p-product__price-card
-              | ¥
-              = product.price
+            p.p-product__name-card = product.name
+            p.p-product__price-card = "¥#{product.price}"

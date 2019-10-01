@@ -1,11 +1,8 @@
 .p-top
   .p-top__image
     = image_tag("/msc_images/msc_image.jpg", :alt=>"MSC", :width=>"100%", class: "p-top__top")
-    h1.p-top__title
-      | mild surf club
+    h1.p-top__title mild surf club
 .p-top__topics
-  p.p-top__index
-    | PRODUCTS
+  p.p-top__index PRODUCTS
 = render 'products/product'
-.l-pagination
-  = will_paginate @products
+.l-pagination = will_paginate @products

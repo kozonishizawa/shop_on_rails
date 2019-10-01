@@ -50,6 +50,4 @@ class Category < ApplicationRecord
   #  ** Methods **
   #----------------------------------------
 
-
-
 end
