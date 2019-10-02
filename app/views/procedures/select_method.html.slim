@@ -1,12 +1,11 @@
-- provide(:title, "支払方法選択")
+- provide :title, '支払方法選択'
 .p-procedure
   .p-procedure__inner
-    h1.p-procedure__heading
-      | お支払い方法の選択
+    h1.p-procedure__heading お支払い方法の選択
     .p-procedure__form
       = form_with model: current_cart, url: procedures_decide_method_path, local: true do |f|
         = f.collection_radio_buttons :method, Cart.methods_i18n, :first, :last, include_hidden: false do |i|
           - content_tag(:div, class: 'p-procedures__form_item') do
             - i.radio_button(class: 'p-procedures__radio') + i.label(class: 'p-procedures__label')
 
-        = f.submit "確認画面へ>>", class: "btn btn-primary"
+        = f.submit '確認画面へ>>', class: 'btn btn-primary'

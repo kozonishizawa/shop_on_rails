@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_030333) do
+ActiveRecord::Schema.define(version: 2019_10_01_155143) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   end
 
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "product_id"
+    t.bigint "product_stock_id"
     t.bigint "cart_id"
     t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
-    t.index ["product_id"], name: "index_cart_items_on_product_id"
+    t.index ["product_stock_id"], name: "index_cart_items_on_product_stock_id"
   end
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
   end
 
   create_table "ordered_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "product_id"
+    t.bigint "product_stock_id"
     t.bigint "purchaser_id"
     t.integer "quantity", default: 0
     t.integer "method"
@@ -79,8 +79,18 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
     t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_ordered_items_on_product_id"
+    t.index ["product_stock_id"], name: "index_ordered_items_on_product_stock_id"
     t.index ["purchaser_id"], name: "index_ordered_items_on_purchaser_id"
+  end
+
+  create_table "product_stocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "color"
+    t.integer "size", limit: 1, default: 0, null: false
+    t.integer "quantity", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_stocks_on_product_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -129,8 +139,10 @@ ActiveRecord::Schema.define(version: 2019_09_29_030333) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cart_items", "carts"
-  add_foreign_key "cart_items", "products"
-  add_foreign_key "ordered_items", "products"
+  add_foreign_key "cart_items", "product_stocks"
+  add_foreign_key "cart_items", "products", column: "product_stock_id"
+  add_foreign_key "ordered_items", "product_stocks"
+  add_foreign_key "ordered_items", "products", column: "product_stock_id"
   add_foreign_key "ordered_items", "purchasers"
   add_foreign_key "purchasers", "users"
 end

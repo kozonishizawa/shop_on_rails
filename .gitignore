@@ -4,12 +4,33 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+# officaial
+*.rbc
+capybara-*.html
+.rspec
+/report
+/.sass-cache
+/.vscode
 /.bundle
+/vendor/bundle
+*.rdb
+/public/storage
+/public/development
+/public/production
+/public/packs
+/public/packs-test
+/public/assets
+/public/sitemaps/*
+!/public/sitemaps/.keep
+/coverage/
+/spec/tmp
+**.orig
+return.txt
+pickle-email-*.html
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+# Ignore the default SQLite database and db dumps
+*.sql
+/db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -17,15 +38,28 @@
 !/log/.keep
 !/tmp/.keep
 
-# Ignore uploaded files in development
-/storage/*
-!/storage/.keep
+**.DS_Store
+.env
+.envrc
+dump.rdb
+
+rails_best_practices_output.html
+/public/best_practices.html
+/public/brakeman.html
 
 /node_modules
 /yarn-error.log
 
-/public/assets
 .byebug_history
+
+# Ignore master key for decrypting credentials and more.
+#/config/master.key
+yarn-debug.log*
+.yarn-integrity
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
 
 # Ignore Spring files.
 /spring/*.pid

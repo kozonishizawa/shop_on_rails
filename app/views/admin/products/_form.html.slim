@@ -1,6 +1,6 @@
 = form_with model: [:admin, @product], local: true do |f|
   .form
-    .form-body
+    #js-product-stocks.form-body
       - @product.errors.full_messages.each do |message|
         .form-error
           = message
@@ -12,20 +12,23 @@
       = f.collection_select :category_id, Category.all, :id, :name
       = link_to 'カテゴリ新規作成', new_admin_category_path
 
+      .c-form-label = f.label :image, '画像'
+        = f.file_field :image, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+
       .c-form-label = f.label :price, '値段'
       = f.text_field :price, value: @product.price, required: :true
         |円
 
-      .c-form-label = f.label :size, 'サイズ'
-      = f.select :size, Product.sizes.keys, {}
-
-      .c-form-label = f.label :stock, '在庫数量'
-      = f.number_field :stock, value: @product.stock, min: 0
-
       .c-form-label = f.label :comment, 'コメント'
       = f.text_area :comment, placeholder: 'コメント', rows: 5, required: :true
+
+      = f.fields_for :stocks do |stock|
+
+        .c-form-label
+          label = "サイズ: #{stock.object.size.upcase}"
+        = stock.hidden_field :size
+
+        .c-form-label = stock.label :quantity, '在庫数'
+        = stock.number_field :quantity, min: 0
       
-      .c-form-label = f.label :image, '画像'
-        = f.file_field :image, accept: :image
-      
-      .u-ta-center.u-mt-30 = f.submit "出品"
+      .u-ta-center.u-mt-30 = f.submit '出品する'

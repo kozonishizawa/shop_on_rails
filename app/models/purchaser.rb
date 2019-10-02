@@ -19,8 +19,21 @@
 
 class Purchaser < ApplicationRecord
 
-  belongs_to :user, optional: true
-	has_many :ordered_items, dependent: :destroy
+	#----------------------------------------
+  #  ** Includes **
+  #----------------------------------------
+
+  #----------------------------------------
+  #  ** Constants **
+  #----------------------------------------
+
+  #----------------------------------------
+  #  ** Enums **
+  #----------------------------------------
+
+  #----------------------------------------
+  #  ** Validations **
+	#----------------------------------------
 	
 	validates :kana, {presence: true}
 	validates :last_name, {presence: true}
@@ -32,4 +45,23 @@ class Purchaser < ApplicationRecord
 	validates :email, {presence: true, confirmation: true} 
 	validates :phone_number, format: {with: /\A[0-9]{3}[0-9]{4}[0-9]{4}\z/}
 
+  #----------------------------------------
+  #  ** Associations **
+	#----------------------------------------
+	
+	belongs_to :user, optional: true
+	has_many :ordered_items, dependent: :destroy
+
+  #----------------------------------------
+  #  ** Delegates **
+  #----------------------------------------
+
+  #----------------------------------------
+  #  ** Scopes **
+  #----------------------------------------
+
+  #----------------------------------------
+  #  ** Methods **
+  #----------------------------------------
+  
 end

@@ -1,3 +1,7 @@
+# ルーティング時のデフォルトURLを指定
+Rails.application.routes.default_url_options[:host] = 'https://you-46.com'
+Rails.application.routes.default_url_options[:protocol] = 'https'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -35,7 +39,7 @@ Rails.application.configure do
   config.assets.unknown_asset_fallback = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = config.x.system['url']
+  config.action_controller.asset_host = 'https://you-46.com'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -72,8 +76,8 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.asset_host = config.x.system['url']
-  config.action_mailer.default_url_options = { host: config.x.system['host'] }
+  config.action_mailer.asset_host = 'https://you-46.com'
+  config.action_mailer.default_url_options = { host: 'you-46.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
@@ -83,9 +87,7 @@ Rails.application.configure do
     port: '587',
     domain: 'smtp.gmail.com',
     authentication: 'plain',
-  # user_name: config.x.system['email'],
     user_name: 'ec081072@gmail.com',
-  # password: Rails.application.credentials.smtp_password,
     password: 'xjs695zb/'
   }
 

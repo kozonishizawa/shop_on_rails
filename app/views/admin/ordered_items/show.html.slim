@@ -24,13 +24,13 @@
             - @ordered_items.each do |ordered_item|
               tr.p-orderedItem__item
                 td.p-orderedItem__data = ordered_item.created_at.strftime('%Y/%m/%d')
-                td.p-orderedItem__image = image_tag ordered_item.product.thumbnail, width: '100%'
-                td.p-orderedItem__data = ordered_item.product.name
-                td.p-orderedItem__data = ordered_item.product.size
-                td.p-orderedItem__data = ordered_item.product.price
+                td.p-orderedItem__image = image_tag ordered_item.stock.product.thumbnail, width: '100%'
+                td.p-orderedItem__data = ordered_item.stock.product.name
+                td.p-orderedItem__data = ordered_item.stock.product.size
+                td.p-orderedItem__data = ordered_item.stock.product.price.to_s(:delimited)
                   | 円
                 td.p-orderedItem__data = ordered_item.quantity
-                td.p-orderedItem__data = ordered_item.product.price * ordered_item.quantity
+                td.p-orderedItem__data = (ordered_item.stock.product.price * ordered_item.quantity).to_s(:delimited)
                   | 円
                 td.p-orderedItem__data = ordered_item.method_i18n
                 td.p-orderedItem__data

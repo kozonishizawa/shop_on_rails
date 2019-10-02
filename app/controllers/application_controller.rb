@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
   before_action :setup_cart_item
   protect_from_forgery with: :exception
-  helper_method :current_cart, :total_price, :total_quantity
+  helper_method :current_cart
   include SessionsHelper
 
   # ログイン中のユーザー
@@ -28,8 +28,7 @@ class ApplicationController < ActionController::Base
 
   # アクセス制限（カートが空）
   def authenticate_cart
-    cart_items = current_cart.cart_items
-    if cart_items.empty?
+    if current_cart.cart_items.empty?
       redirect_to root_path, flash: {danger: 'カート内に商品がありません'}
     end
   end
@@ -50,40 +49,14 @@ class ApplicationController < ActionController::Base
 
   # 買い物カゴ
   def current_cart
-    if session[:cart_id]
-      cart = Cart.find_by(id: session[:cart_id])
-    else
-      cart = Cart.create
-      session[:cart_id] = cart.id
-    end
+    cart = Cart.find_or_create_by(id: session[:cart_id])
+    session[:cart_id] = cart.id
     cart
   end
-  
-  # カート内商品の合計金額
-  def total_price
-    cart_items = current_cart.cart_items
-    total_price = 0
-    cart_items.each_with_object(0) do |cart_item, quantity|
-      price = cart_item.product.price * cart_item.quantity
-      total_price += price
-    end
-    total_price
-  end
 
-  # カート内商品の合計数量
-  def total_quantity
-    cart_items = current_cart.cart_items
-    total_quantity = 0
-    cart_items.each do |cart_item|
-      total_quantity += cart_item.quantity
-    end
-    total_quantity
-  end
-  
   private
 
     def setup_cart_item
-      @cart_item = current_cart.cart_items.find_or_initialize_by(product_id: params[:id])
+      @cart_item = current_cart.cart_items.find_or_initialize_by(product_stock_id: params[:id])
     end
-
 end

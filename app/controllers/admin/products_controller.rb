@@ -8,7 +8,15 @@ class Admin::ProductsController < ApplicationController
   end
 
   def new
-  	@product = Product.new
+    @product = Product.new
+    @product.stocks.build([
+      {size: :free},
+      {size: :xs},
+      {size: :s},
+      {size: :m},
+      {size: :l},
+      {size: :xl},
+    ])
   end
 
   def create
@@ -42,7 +50,7 @@ class Admin::ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit :name, :category_id, :price, :comment, :size, :stock, :image
+      params.require(:product).permit :name, :category_id, :price, :comment, :image, stocks_attributes: [:id, :color, :size, :quantity]
     end
 
     def search_params

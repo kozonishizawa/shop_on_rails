@@ -12,7 +12,6 @@
             th.p-stocks__header カテゴリー
             th.p-stocks__header サイズ
             th.p-stocks__header 金額
-            th.p-stocks__header 在庫数量
             th.p-stocks__header
         tbody.p-stocks__body
           - @products.each do |product|
@@ -27,10 +26,7 @@
               td.p-stocks__data = link_to product.name, edit_admin_product_path(product.id)
               td.p-stocks__data = product.category&.name
               td.p-stocks__data = product.size
-              td.p-stocks__data = product.price
-              td.p-stocks__update = form_with model: product, url: admin_product_path(product.id), local: true do |f|
-                .p-stocks__formItem
-                  = f.number_field :stock, class: 'p-stocks__stock', min: 0
-                  = f.submit '更新', class: 'p-stocks__updateButton'
+              td.p-stocks__data = product.price.to_s(:delimited)
+              td.p-stocks__data = link_to '編集', edit_admin_product_path(product.id)
               td.p-stocks__destroy = link_to '削除', admin_product_path(product.id), method: :delete, data: { confirm: "#{product.name}の出品を取りやめますか？" }, class: 'btn btn-danger'
     .pagination = will_paginate @products
