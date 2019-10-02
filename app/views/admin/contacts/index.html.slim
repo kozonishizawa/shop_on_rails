@@ -1,0 +1,24 @@
+- provide(:title, 'お問い合わせ一覧')
+.p-contacts
+  .p-contacts__inner
+  h1.p-contacts__heading お問い合わせ一覧
+  .p-contacts__listWrapper
+    table.p-contacts__table
+      thread.p-contacts__thread
+        tr.p-contacts__row
+          th.p-contacts__header ID
+          th.p-contacts__header 日時
+          th.p-contacts__header 送信者
+          th.p-contacts__header タイトル
+          th.p-contacts__header　状態
+      tbody.p-contacts__body
+        - @contacts.each do |contact|
+          tr.p-contacts__row
+            td.p-contacts__data = contact.id
+            td.p-contacts__data = contact.created_at
+            td.p-contacts__data = contact.name
+            td.p-contacts__data = contact.title
+            td.p-contacts__data = contact.status
+    .pagination = will_paginate
+
+
