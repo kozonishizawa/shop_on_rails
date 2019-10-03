@@ -43,7 +43,7 @@ Rails.application.configure do
     domain: 'smtp.gmail.com',
     authentication: 'plain',
     user_name: 'ec081072@gmail.com',
-    password: 'xjs695zb/'
+    password: 'njdvwhbzievojpkj'
   }
 
   # Print deprecation notices to the Rails logger.
