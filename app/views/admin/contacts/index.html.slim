@@ -1,6 +1,6 @@
 - provide(:title, 'お問い合わせ一覧')
 .p-contacts
-  .p-contacts__inner
+  .p-contacts__adminInner
   h1.p-contacts__heading お問い合わせ一覧
   .p-contacts__listWrapper
     table.p-contacts__table
@@ -10,15 +10,15 @@
           th.p-contacts__header 日時
           th.p-contacts__header 送信者
           th.p-contacts__header タイトル
-          th.p-contacts__header　状態
+          th.p-contacts__header colspan=3 状態
       tbody.p-contacts__body
         - @contacts.each do |contact|
           tr.p-contacts__row
             td.p-contacts__data = contact.id
-            td.p-contacts__data = contact.created_at
+            td.p-contacts__data = l(contact.created_at, format: :long)
             td.p-contacts__data = contact.name
             td.p-contacts__data = contact.title
             td.p-contacts__data = contact.status
-    .pagination = will_paginate
-
+            td.p-contacts__data = link_to '詳細', admin_contact_path(contact)
+            td.p-contacts__data 完了にする
 

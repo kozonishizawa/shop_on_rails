@@ -14,6 +14,6 @@ class Front::ContactsController < ApplicationController
 
   private
     def contact_params
-      params.require(:contact).parmit :name, :title, :organization, :email, :tel, :body
+      params.require(:contact).permit :name, :title, :organization, :email, :tel, :body
     end
 end
